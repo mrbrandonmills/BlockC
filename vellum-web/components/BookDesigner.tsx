@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useBookStore } from '@/lib/store'
 import { BookOpen, Download, Sparkles } from 'lucide-react'
 import TemplateCarousel from '@/components/TemplateCarousel'
+import DesignAssistant from '@/components/DesignAssistant'
 
 export default function BookDesigner() {
   const { currentProject, setSelectedStyle } = useBookStore()
@@ -191,9 +192,15 @@ export default function BookDesigner() {
       <div className="flex-1 flex overflow-hidden">
         {/* Left - Template Carousel */}
         <div className="w-2/5 bg-white border-r border-gray-200 overflow-y-auto p-8">
+          {/* AI Design Assistant */}
+          <div className="mb-8">
+            <DesignAssistant />
+          </div>
+
+          {/* Template Selection */}
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Choose Your Design</h3>
-            <p className="text-gray-600">32 professional templates organized by mood</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Browse All Templates</h3>
+            <p className="text-gray-600">32 professional designs organized by mood</p>
           </div>
 
           <TemplateCarousel
