@@ -103,8 +103,19 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
     }
   }, [])
 
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [processingStep, setProcessingStep] = useState('')
+
   const processFile = async (file: File) => {
+    setIsProcessing(true)
+    setProcessingStep('Reading your manuscript...')
+
+    await new Promise(resolve => setTimeout(resolve, 500))
+
     const content = await file.text()
+
+    setProcessingStep('Detecting chapters...')
+    await new Promise(resolve => setTimeout(resolve, 400))
 
     // Parse chapters from markdown
     const chapters: any[] = []
@@ -131,7 +142,15 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
       chapters.push(currentChapter)
     }
 
+    setProcessingStep(`Found ${chapters.length} chapters! Formatting...`)
+    await new Promise(resolve => setTimeout(resolve, 600))
+
     createProject(file.name.replace(/\.[^/.]+$/, ''), chapters)
+
+    setProcessingStep('Opening your book designer...')
+    await new Promise(resolve => setTimeout(resolve, 400))
+
+    setIsProcessing(false)
     onImport()
   }
 
@@ -225,15 +244,39 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
         }}
       />
 
+      {/* Processing Overlay */}
+      {isProcessing && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center">
+          <div className="text-center space-y-6 max-w-md">
+            <div className="relative">
+              <div className="w-32 h-32 mx-auto">
+                <div className="absolute inset-0 border-4 border-lime-400/30 rounded-full" />
+                <div className="absolute inset-0 border-4 border-lime-400 rounded-full border-t-transparent animate-spin" />
+              </div>
+              <Star className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-lime-400 animate-pulse" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold text-white">{processingStep}</h3>
+              <p className="text-gray-400">This will only take a moment...</p>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-8 py-32">
           <div className="text-center space-y-8 mb-20">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full">
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-gray-300">The future of book design</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-lime-400/10 backdrop-blur-xl border border-lime-400/20 rounded-full">
+              <Sparkles className="w-4 h-4 text-lime-400" />
+              <span className="text-sm font-medium text-lime-300">Your personal Vellum alternative • Free forever</span>
             </div>
 
             {/* Headline with staggered animation */}
@@ -321,14 +364,61 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
             ))}
           </div>
 
-          {/* Preview Section */}
+          {/* Interactive 3D Preview Section */}
           <div className="relative mb-32">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl blur-3xl" />
-            <div className="relative bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-2">
-              <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-12 aspect-video flex items-center justify-center">
-                <div className="text-center space-y-6">
-                  <BookOpen className="w-32 h-32 mx-auto text-blue-400 opacity-50" />
-                  <p className="text-3xl font-bold text-gray-500">Upload a manuscript to see the magic</p>
+            <div className="absolute inset-0 bg-gradient-to-r from-lime-600/20 to-blue-600/20 rounded-3xl blur-3xl" />
+            <div className="relative bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-3xl font-bold text-white mb-2">See Your Book Come to Life</h3>
+                <p className="text-gray-400">Upload your manuscript and watch it transform into a beautiful book in seconds</p>
+              </div>
+
+              <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-12 min-h-[600px] flex items-center justify-center relative overflow-hidden">
+                {/* Background animation */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-lime-400 rounded-full blur-3xl animate-pulse" />
+                </div>
+
+                {/* Interactive Book Preview */}
+                <div className="relative z-10 text-center space-y-8">
+                  <div className="relative inline-block animate-float">
+                    {/* Book mockup */}
+                    <div className="relative w-64 h-80 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500">
+                      <div className="absolute inset-0 bg-gradient-to-br from-lime-400/20 to-blue-400/20 rounded-lg" />
+                      <div className="absolute inset-4 flex flex-col items-center justify-center text-white">
+                        <Star className="w-16 h-16 mb-4 text-lime-400" />
+                        <div className="text-2xl font-bold mb-2">Your Book</div>
+                        <div className="text-sm text-gray-300">Beautifully Formatted</div>
+                      </div>
+                      {/* Page edge effect */}
+                      <div className="absolute right-0 top-4 bottom-4 w-2 bg-gradient-to-r from-transparent to-white/10" />
+                    </div>
+
+                    {/* Floating elements */}
+                    <div className="absolute -top-6 -right-6 w-12 h-12 bg-lime-400 rounded-full animate-pulse" />
+                    <div className="absolute -bottom-6 -left-6 w-8 h-8 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-center gap-8 text-sm text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" />
+                        <span>Instant Formatting</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                        <span>3D Preview</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                        <span>Print Ready</span>
+                      </div>
+                    </div>
+
+                    <p className="text-2xl font-bold text-white">
+                      Drop your manuscript above to get started →
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
