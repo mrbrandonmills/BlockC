@@ -189,54 +189,15 @@ const generateId = () => Math.random().toString(36).substr(2, 9)
 
 export const useBookStore = create<BookState>()(
   persist(
-    (set, get) => {
-      // Create a sample project with demo content
-      const sampleChapters: Chapter[] = [
-        {
-          id: 'sample-1',
-          title: 'Chapter 1: The Beginning',
-          content: 'It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.\n\nThe hallway smelt of boiled cabbage and old rag mats. At one end of it a coloured poster, too large for indoor display, had been tacked to the wall.',
-          order: 0,
-          sectionType: 'chapter',
-          numbered: true,
-          chapterNumber: 1,
-        },
-        {
-          id: 'sample-2',
-          title: 'Chapter 2: The Discovery',
-          content: 'Winston made for the stairs. It was no use trying the lift. Even at the best of times it was seldom working, and at present the electric current was cut off during daylight hours. It was part of the economy drive in preparation for Hate Week.',
-          order: 1,
-          sectionType: 'chapter',
-          numbered: true,
-          chapterNumber: 2,
-        },
-      ]
-
-      const sampleProject: Project = {
-        id: 'sample-project',
-        name: 'Sample Book - Visual Demo',
-        title: 'Sample Book - Visual Demo',
-        subtitle: 'Experience the visual designer',
-        author: 'Demo Author',
-        authors: ['Demo Author'],
-        chapters: sampleChapters,
-        selectedStyle: 'luxury-lab',
-        customColors: {},
-        customFonts: {},
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        versions: [],
-      }
-
-      return {
-      // Initial state with sample project
-      currentProject: sampleProject,
-      projects: [sampleProject],
-      activeChapterId: sampleChapters[0].id,
+    (set, get) => ({
+      // Initial state - NO auto-load, show welcome screen
+      currentProject: null,
+      projects: [],
+      activeChapterId: null,
       content: '',
       filename: '',
-      title: 'Sample Book - Visual Demo',
-      authors: ['Demo Author'],
+      title: 'Block C: The Laboratory of Living',
+      authors: ['Brandon Mills', 'Claude'],
       selectedStyle: 'luxury-lab',
       customColors: {},
       customFonts: {},
@@ -629,8 +590,7 @@ export const useBookStore = create<BookState>()(
           }))
         }
       },
-    }
-  },
+    }),
     {
       name: 'vellum-storage',
       partialize: (state) => ({
