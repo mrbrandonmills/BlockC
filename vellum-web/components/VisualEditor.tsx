@@ -119,7 +119,7 @@ function DraggableElement({ element, onUpdate, onDelete, isSelected, onSelect }:
 
   return (
     <div
-      ref={drag}
+      ref={drag as any}
       onClick={onSelect}
       className={`absolute cursor-move ${
         isSelected ? 'ring-2 ring-blue-500' : ''
@@ -402,7 +402,7 @@ export default function VisualEditor({ pageWidth = 600, pageHeight = 900, onElem
         <div className="flex-1 bg-gray-100 p-8 overflow-auto flex items-center justify-center">
           <div
             id="canvas"
-            ref={drop}
+            ref={drop as any}
             className="bg-white shadow-2xl relative"
             style={{
               width: pageWidth,
