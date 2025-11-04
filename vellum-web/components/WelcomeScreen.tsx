@@ -1,8 +1,20 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
-import { Upload, BookOpen, Sparkles, Zap, Palette, Download, ArrowRight } from 'lucide-react'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { Upload, BookOpen, Sparkles, Zap, Palette, Download, ArrowRight, Star } from 'lucide-react'
 import { useBookStore } from '@/lib/store'
+
+// Flowing particles configuration
+const PARTICLES_COUNT = 50
+const createParticle = (index: number) => ({
+  id: index,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 4 + 1,
+  speedX: (Math.random() - 0.5) * 0.5,
+  speedY: (Math.random() - 0.5) * 0.5,
+  opacity: Math.random() * 0.5 + 0.1,
+})
 
 interface WelcomeScreenProps {
   onImport: () => void
@@ -13,6 +25,40 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [scrollY, setScrollY] = useState(0)
+  const [particles, setParticles] = useState(() =>
+    Array.from({ length: PARTICLES_COUNT }, (_, i) => createParticle(i))
+  )
+  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  // Animated particle system
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setParticles(prev => prev.map(p => ({
+        ...p,
+        x: (p.x + p.speedX + 100) % 100,
+        y: (p.y + p.speedY + 100) % 100,
+      })))
+    }, 50)
+    return () => clearInterval(interval)
+  }, [])
+
+  // Intersection observer for scroll animations
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          setIsVisible(prev => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting
+          }))
+        })
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    )
+
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -113,28 +159,71 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden relative">
       {/* Animated Background Gradient */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-40 transition-opacity duration-1000"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99, 102, 241, 0.3), transparent 50%)`,
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(157, 255, 32, 0.15), rgba(99, 102, 241, 0.15) 40%, transparent 70%)`,
         }}
       />
 
-      {/* Grid Pattern */}
+      {/* Flowing Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {particles.map(p => (
+          <div
+            key={p.id}
+            className="absolute rounded-full bg-gradient-to-br from-blue-400 to-purple-600 transition-all duration-1000"
+            style={{
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+              opacity: p.opacity,
+              boxShadow: `0 0 ${p.size * 2}px rgba(99, 102, 241, ${p.opacity})`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Grid Pattern with parallax */}
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-          backgroundSize: '100px 100px',
-          transform: `translateY(${scrollY * 0.5}px)`,
+          backgroundImage: `linear-gradient(rgba(157,255,32,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(157,255,32,0.1) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px',
+          transform: `translateY(${scrollY * 0.3}px) scale(1.2)`,
         }}
       />
 
-      {/* Floating Orbs */}
-      <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse" />
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }} />
+      {/* Dynamic Orbs */}
+      <div
+        className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 animate-pulse"
+        style={{
+          top: '10%',
+          left: '10%',
+          background: 'radial-gradient(circle, rgba(157,255,32,0.4), transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 animate-pulse"
+        style={{
+          bottom: '10%',
+          right: '10%',
+          background: 'radial-gradient(circle, rgba(99,102,241,0.4), transparent 70%)',
+          animationDelay: '1s',
+        }}
+      />
+      <div
+        className="absolute w-96 h-96 rounded-full blur-3xl opacity-15 animate-pulse"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: 'radial-gradient(circle, rgba(233,69,96,0.3), transparent 70%)',
+          animationDelay: '2s',
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-10">
@@ -147,22 +236,31 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
               <span className="text-sm font-medium text-gray-300">The future of book design</span>
             </div>
 
-            {/* Headline */}
+            {/* Headline with staggered animation */}
             <h1 className="text-8xl font-black tracking-tight leading-none">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
+              <span
+                className="inline-block bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent animate-fade-in-up"
+                style={{ animationDelay: '0.1s' }}
+              >
                 Design Books
               </span>
               <br />
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span
+                className="inline-block bg-gradient-to-r from-lime-400 via-green-400 to-emerald-400 bg-clip-text text-transparent animate-fade-in-up"
+                style={{ animationDelay: '0.3s', textShadow: '0 0 40px rgba(157,255,32,0.3)' }}
+              >
                 Like Never Before
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
-              Visual editor. Drag-drop design. 3D preview. Export print-ready PDFs.
+            <p
+              className="text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed animate-fade-in-up"
+              style={{ animationDelay: '0.5s' }}
+            >
+              <span className="text-lime-400 font-semibold">Visual editor</span>. Drag-drop design. <span className="text-blue-400 font-semibold">3D preview</span>. Export print-ready PDFs.
               <br />
-              Everything you need to create stunning books.
+              Everything you need to create <span className="text-purple-400 font-semibold">stunning books</span>.
             </p>
 
             {/* CTA */}
