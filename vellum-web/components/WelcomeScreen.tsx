@@ -13,57 +13,51 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
 
-  const parseDocument = (content: string, filename: string) => {
-    const lines = content.split('\n')
-    const chapters: Array<{ title: string; content: string; order: number; sectionType?: any }> = []
-
-    // Add title page
-    chapters.push({
-      title: 'Title Page',
-      content: '',
-      order: 0,
-      sectionType: 'title-page',
-    })
-
-    let currentChapter: any = null
-    let chapterOrder = 1
-
-    for (const line of lines) {
-      if (line.startsWith('# ')) {
-        if (currentChapter) {
-          chapters.push(currentChapter)
-        }
-        currentChapter = {
-          title: line.replace(/^# /, '').trim(),
-          content: '',
-          order: chapterOrder++,
-          sectionType: 'chapter',
-        }
-      } else if (currentChapter) {
-        currentChapter.content += line + '\n'
-      }
-    }
-
-    if (currentChapter) {
-      chapters.push(currentChapter)
-    }
-
-    if (chapters.length === 1) {
-      chapters.push({
-        title: filename.replace(/\.[^/.]+$/, ''),
-        content: content,
-        order: 1,
-        sectionType: 'chapter',
-      })
-    }
-
-    return chapters
-  }
-
-  const processFile = useCallback(async (file: File) => {
+  const processFile = async (file: File) => {
     try {
       const content = await file.text()
-      const chapters = parseDocument(content, file.name)
+      const lines = content.split('\n')
+      const chapters: Array<{ title: string; content: string; order: number; sectionType?: any }> = []
+
+      // Add title page
+      chapters.push({
+        title: 'Title Page',
+        content: '',
+        order: 0,
+        sectionType: 'title-page',
+      })
+
+      let currentChapter: any = null
+      let chapterOrder = 1
+
+      for (const line of lines) {
+        if (line.startsWith('# ')) {
+          if (currentChapter) {
+            chapters.push(currentChapter)
+          }
+          currentChapter = {
+            title: line.replace(/^# /, '').trim(),
+            content: '',
+            order: chapterOrder++,
+            sectionType: 'chapter',
+          }
+        } else if (currentChapter) {
+          currentChapter.content += line + '\n'
+        }
+      }
+
+      if (currentChapter) {
+        chapters.push(currentChapter)
+      }
+
+      if (chapters.length === 1) {
+        chapters.push({
+          title: file.name.replace(/\.[^/.]+$/, ''),
+          content: content,
+          order: 1,
+          sectionType: 'chapter',
+        })
+      }
 
       createProject(file.name.replace(/\.[^/.]+$/, ''), chapters)
       onImport()
@@ -71,7 +65,7 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
       console.error('Error processing file:', error)
       alert('Failed to process file. Please try again.')
     }
-  }, [createProject, onImport])
+  }
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault()
