@@ -22,7 +22,7 @@ export default function ChapterPanel() {
 
   const handleAddChapter = () => {
     if (newChapterTitle.trim()) {
-      addChapter(newChapterTitle)
+      addChapter({ title: newChapterTitle })
       setNewChapterTitle('')
       setShowNewChapter(false)
     }
