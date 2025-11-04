@@ -2,15 +2,8 @@
 
 import { useState } from 'react'
 import { useBookStore } from '@/lib/store'
-import { Check, BookOpen, Download, Sparkles, ArrowLeft } from 'lucide-react'
-
-const TEMPLATES = [
-  { id: 'luxury-lab', name: 'Luxury Laboratory', category: 'Modern' },
-  { id: 'serif-classic', name: 'Serif Classic', category: 'Traditional' },
-  { id: 'modern-sans', name: 'Modern Sans', category: 'Contemporary' },
-  { id: 'minimalist', name: 'Minimalist', category: 'Ultra-Clean' },
-  { id: 'academic', name: 'Academic', category: 'Professional' },
-]
+import { BookOpen, Download, Sparkles } from 'lucide-react'
+import TemplateCarousel from '@/components/TemplateCarousel'
 
 export default function BookDesigner() {
   const { currentProject, setSelectedStyle } = useBookStore()
@@ -162,89 +155,69 @@ export default function BookDesigner() {
   }
 
   return (
-    <div className="h-screen flex bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      {/* Left Panel - Template Gallery */}
-      <div className="w-96 bg-white border-r border-gray-200 overflow-y-auto">
-        <div className="p-6 border-b border-gray-200 bg-gradient-to-br from-blue-50 to-purple-50">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <BookOpen className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h2 className="font-bold text-gray-900">{currentProject.title}</h2>
-              <p className="text-xs text-gray-600">{currentProject.chapters.length} sections</p>
-            </div>
+    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      {/* Top Bar */}
+      <div className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <BookOpen className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h2 className="font-bold text-gray-900">{currentProject.title}</h2>
+            <p className="text-xs text-gray-600">{currentProject.chapters.length} sections</p>
           </div>
         </div>
 
-        <div className="p-6">
-          <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Choose Template</h3>
-
-          <div className="space-y-3">
-            {TEMPLATES.map((template) => {
-              const isSelected = selectedTemplate === template.id
-
-              return (
-                <button
-                  key={template.id}
-                  onClick={() => handleSelectTemplate(template.id)}
-                  className={`w-full text-left p-4 rounded-xl transition-all duration-200 ${
-                    isSelected
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
-                      : 'bg-gray-50 hover:bg-gray-100 text-gray-900'
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-sm">{template.name}</div>
-                      <div className={`text-xs ${isSelected ? 'text-white/80' : 'text-gray-500'}`}>
-                        {template.category}
-                      </div>
-                    </div>
-                    {isSelected && <Check className="w-5 h-5" />}
-                  </div>
-                </button>
-              )
-            })}
-          </div>
-
-          <button
-            onClick={handleExport}
-            disabled={isExporting}
-            className="w-full mt-8 px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
-          >
-            {isExporting ? (
-              <>
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Exporting...
-              </>
-            ) : (
-              <>
-                <Download className="w-5 h-5" />
-                Export Book
-              </>
-            )}
-          </button>
-        </div>
+        <button
+          onClick={handleExport}
+          disabled={isExporting}
+          className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
+        >
+          {isExporting ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              Exporting...
+            </>
+          ) : (
+            <>
+              <Download className="w-5 h-5" />
+              Export PDF
+            </>
+          )}
+        </button>
       </div>
 
-      {/* Right Panel - Live Preview */}
-      <div className="flex-1 flex flex-col">
-        <div className="bg-white border-b border-gray-200 px-8 py-4">
-          <div className="flex items-center justify-between">
+      {/* Main Content Area */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left - Template Carousel */}
+        <div className="w-2/5 bg-white border-r border-gray-200 overflow-y-auto p-8">
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Choose Your Design</h3>
+            <p className="text-gray-600">32 professional templates organized by mood</p>
+          </div>
+
+          <TemplateCarousel
+            selectedTemplate={selectedTemplate}
+            onSelectTemplate={handleSelectTemplate}
+          />
+        </div>
+
+        {/* Right - Live Preview */}
+        <div className="flex-1 flex flex-col bg-gray-100">
+          <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 px-8 py-4">
             <div className="flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-blue-600" />
               <div>
                 <h3 className="font-bold text-gray-900">Live Preview</h3>
-                <p className="text-sm text-gray-600">Your book in {TEMPLATES.find(t => t.id === selectedTemplate)?.name}</p>
+                <p className="text-sm text-gray-600">See your book with each template instantly</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex-1 overflow-auto p-8 bg-gray-100">
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden" style={{ aspectRatio: '6/9', minHeight: '800px' }}>
-            {renderPreview(selectedTemplate)}
+          <div className="flex-1 overflow-auto p-12">
+            <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden" style={{ aspectRatio: '6/9', minHeight: '900px' }}>
+              {renderPreview(selectedTemplate)}
+            </div>
           </div>
         </div>
       </div>

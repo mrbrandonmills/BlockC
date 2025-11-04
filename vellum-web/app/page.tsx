@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useBookStore } from '@/lib/store'
 import WelcomeScreen from '@/components/WelcomeScreen'
-import BookEditor from '@/components/BookEditor'
+import BookDesigner from '@/components/BookDesigner'
 
 export default function Home() {
   const { currentProject } = useBookStore()
@@ -14,6 +14,6 @@ export default function Home() {
     return <WelcomeScreen onImport={() => setHasImported(true)} />
   }
 
-  // Show book editor once project exists or file imported
-  return <BookEditor />
+  // Show new book designer with live previews
+  return <BookDesigner />
 }
