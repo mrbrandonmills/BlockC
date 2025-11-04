@@ -15,7 +15,7 @@ interface TemplateData {
   description: string
 }
 
-// Sample visual templates
+// Professional visual templates library
 const VISUAL_TEMPLATES: TemplateData[] = [
   {
     id: 'classic-chapter',
@@ -103,6 +103,200 @@ const VISUAL_TEMPLATES: TemplateData[] = [
       { id: '2', type: 'shape', content: 'rectangle', x: 50, y: 500, width: 8, height: 80, backgroundColor: '#000000' },
       { id: '3', type: 'text', content: 'Chapter Title', x: 150, y: 200, width: 400, height: 60, fontSize: 32, bold: true, fontFamily: 'Arial' },
       { id: '4', type: 'text', content: 'Content starts here...', x: 150, y: 280, width: 400, height: 500, fontSize: 14, fontFamily: 'Arial' },
+    ]
+  },
+  {
+    id: 'art-deco',
+    name: 'Art Deco Glamour',
+    category: 'Chapter Pages',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="g" x1="0" y1="0" x2="0" y2="1"%3E%3Cstop offset="0" stop-color="%23d4af37"/%3E%3Cstop offset="1" stop-color="%23bf953f"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="%231a1a1a" width="400" height="600"/%3E%3Crect fill="url(%23g)" x="150" y="100" width="100" height="4"/%3E%3Ctext x="200" y="180" text-anchor="middle" font-size="36" font-weight="bold" fill="%23d4af37" font-family="Georgia"%3EChapter One%3C/text%3E%3Crect fill="url(%23g)" x="150" y="200" width="100" height="4"/%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: true,
+    description: 'Luxurious Art Deco styling with gold accents',
+    elements: [
+      { id: '1', type: 'line', content: '', x: 200, y: 120, width: 200, height: 4, color: '#d4af37' },
+      { id: '2', type: 'text', content: 'Chapter One', x: 100, y: 160, width: 400, height: 60, fontSize: 36, align: 'center', bold: true, color: '#d4af37', fontFamily: 'Georgia' },
+      { id: '3', type: 'line', content: '', x: 200, y: 240, width: 200, height: 4, color: '#d4af37' },
+    ]
+  },
+  {
+    id: 'botanical-nature',
+    name: 'Botanical Nature',
+    category: 'Chapter Pages',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23f5f5dc" width="400" height="600"/%3E%3Ctext x="200" y="150" text-anchor="middle" font-size="24" fill="%232d5016"%3E%E2%9D%A6%3C/text%3E%3Ctext x="200" y="220" text-anchor="middle" font-size="28" font-weight="600" fill="%232d5016" font-family="Georgia"%3EChapter Title%3C/text%3E%3Ctext x="200" y="270" text-anchor="middle" font-size="24" fill="%232d5016"%3E%E2%9D%A6%3C/text%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: true,
+    description: 'Natural, organic design with botanical elements',
+    elements: [
+      { id: '1', type: 'ornament', content: '❦', x: 250, y: 100, width: 100, height: 40 },
+      { id: '2', type: 'text', content: 'Chapter Title', x: 100, y: 150, width: 400, height: 60, fontSize: 28, align: 'center', bold: true, color: '#2d5016', fontFamily: 'Georgia' },
+      { id: '3', type: 'ornament', content: '❦', x: 250, y: 220, width: 100, height: 40 },
+    ]
+  },
+  {
+    id: 'neon-cyberpunk',
+    name: 'Neon Cyberpunk',
+    category: 'Modern',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="n" x1="0" y1="0" x2="1" y2="1"%3E%3Cstop offset="0" stop-color="%23ff006e"/%3E%3Cstop offset="1" stop-color="%238338ec"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="%230a0a0a" width="400" height="600"/%3E%3Ctext x="50" y="200" font-size="64" font-weight="900" fill="url(%23n)" font-family="Arial"%3E01%3C/text%3E%3Crect fill="%23ff006e" x="50" y="220" width="150" height="3"/%3E%3Ctext x="50" y="280" font-size="24" font-weight="600" fill="%23fff" font-family="Arial"%3ECHAPTER TITLE%3C/text%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: true,
+    description: 'Futuristic cyberpunk aesthetic with neon colors',
+    elements: [
+      { id: '1', type: 'text', content: '01', x: 50, y: 120, width: 150, height: 100, fontSize: 64, bold: true, color: '#ff006e', fontFamily: 'Arial' },
+      { id: '2', type: 'line', content: '', x: 50, y: 220, width: 150, height: 3, color: '#ff006e' },
+      { id: '3', type: 'text', content: 'CHAPTER TITLE', x: 50, y: 250, width: 500, height: 50, fontSize: 24, bold: true, color: '#ffffff', fontFamily: 'Arial' },
+    ]
+  },
+  {
+    id: 'watercolor-soft',
+    name: 'Watercolor Dreams',
+    category: 'Classic',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fff" width="400" height="600"/%3E%3Cellipse cx="200" cy="150" rx="120" ry="80" fill="%23e0b0ff" opacity="0.3"/%3E%3Cellipse cx="250" cy="180" rx="100" ry="60" fill="%23b0d4ff" opacity="0.3"/%3E%3Ctext x="200" y="250" text-anchor="middle" font-size="32" font-weight="300" fill="%235a5a5a" font-family="Georgia"%3EChapter One%3C/text%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: false,
+    description: 'Soft watercolor aesthetic with dreamy pastels',
+    elements: [
+      { id: '1', type: 'shape', content: 'circle', x: 180, y: 80, width: 120, height: 80, backgroundColor: '#e0b0ff' },
+      { id: '2', type: 'shape', content: 'circle', x: 230, y: 110, width: 100, height: 60, backgroundColor: '#b0d4ff' },
+      { id: '3', type: 'text', content: 'Chapter One', x: 100, y: 200, width: 400, height: 60, fontSize: 32, align: 'center', color: '#5a5a5a', fontFamily: 'Georgia' },
+    ]
+  },
+  {
+    id: 'magazine-editorial',
+    name: 'Magazine Editorial',
+    category: 'Modern',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fff" width="400" height="600"/%3E%3Crect fill="%23000" x="0" y="0" width="400" height="180"/%3E%3Ctext x="50" y="120" font-size="48" font-weight="900" fill="%23fff" font-family="Arial"%3ECHAPTER%3C/text%3E%3Ctext x="50" y="250" font-size="72" font-weight="900" fill="%23000" font-family="Arial"%3E01%3C/text%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: true,
+    description: 'Bold magazine-style editorial layout',
+    elements: [
+      { id: '1', type: 'shape', content: 'rectangle', x: 0, y: 0, width: 600, height: 180, backgroundColor: '#000000' },
+      { id: '2', type: 'text', content: 'CHAPTER', x: 50, y: 70, width: 500, height: 60, fontSize: 48, bold: true, color: '#ffffff', fontFamily: 'Arial' },
+      { id: '3', type: 'text', content: '01', x: 50, y: 200, width: 200, height: 100, fontSize: 72, bold: true, color: '#000000', fontFamily: 'Arial' },
+    ]
+  },
+  {
+    id: 'typewriter-vintage',
+    name: 'Typewriter Vintage',
+    category: 'Classic',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23f4f1de" width="400" height="600"/%3E%3Ctext x="50" y="200" font-size="16" font-family="Courier" fill="%233d405b"%3E# CHAPTER ONE%3C/text%3E%3Ctext x="50" y="250" font-size="24" font-family="Courier" font-weight="bold" fill="%233d405b"%3EThe Beginning%3C/text%3E%3Ctext x="50" y="300" font-size="14" font-family="Courier" fill="%233d405b"%3E----%3C/text%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: false,
+    description: 'Nostalgic typewriter-style formatting',
+    elements: [
+      { id: '1', type: 'text', content: '# CHAPTER ONE', x: 50, y: 180, width: 500, height: 30, fontSize: 16, fontFamily: 'Courier', color: '#3d405b' },
+      { id: '2', type: 'text', content: 'The Beginning', x: 50, y: 220, width: 500, height: 40, fontSize: 24, bold: true, fontFamily: 'Courier', color: '#3d405b' },
+      { id: '3', type: 'text', content: '----', x: 50, y: 270, width: 500, height: 20, fontSize: 14, fontFamily: 'Courier', color: '#3d405b' },
+    ]
+  },
+  {
+    id: 'luxury-gold-foil',
+    name: 'Luxury Gold Foil',
+    category: 'Classic',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23f8f8f8" width="400" height="600"/%3E%3Ctext x="200" y="180" text-anchor="middle" font-size="14" letter-spacing="4" fill="%23d4af37" font-family="Georgia"%3ECHAPTER%3C/text%3E%3Ctext x="200" y="250" text-anchor="middle" font-size="48" font-weight="bold" fill="%23d4af37" font-family="Georgia"%3EI%3C/text%3E%3Ctext x="200" y="290" text-anchor="middle" font-size="18" fill="%23333" font-family="Georgia"%3EThe Title%3C/text%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: true,
+    description: 'Luxurious gold foil effect typography',
+    elements: [
+      { id: '1', type: 'text', content: 'CHAPTER', x: 150, y: 150, width: 300, height: 30, fontSize: 14, align: 'center', color: '#d4af37', fontFamily: 'Georgia' },
+      { id: '2', type: 'text', content: 'I', x: 200, y: 190, width: 200, height: 80, fontSize: 48, align: 'center', bold: true, color: '#d4af37', fontFamily: 'Georgia' },
+      { id: '3', type: 'text', content: 'The Title', x: 150, y: 270, width: 300, height: 30, fontSize: 18, align: 'center', color: '#333333', fontFamily: 'Georgia' },
+    ]
+  },
+  {
+    id: 'tech-blueprint',
+    name: 'Tech Blueprint',
+    category: 'Modern',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%230d3b66" width="400" height="600"/%3E%3Cline x1="50" y1="150" x2="350" y2="150" stroke="%2300d4ff" stroke-width="1" opacity="0.5"/%3E%3Ctext x="50" y="200" font-size="12" fill="%2300d4ff" font-family="monospace"%3ESECTION_01%3C/text%3E%3Ctext x="50" y="240" font-size="32" font-weight="bold" fill="%23fff" font-family="monospace"%3EChapter Title%3C/text%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: false,
+    description: 'Technical blueprint-style design',
+    elements: [
+      { id: '1', type: 'line', content: '', x: 50, y: 150, width: 500, height: 1, color: '#00d4ff' },
+      { id: '2', type: 'text', content: 'SECTION_01', x: 50, y: 170, width: 500, height: 30, fontSize: 12, color: '#00d4ff', fontFamily: 'monospace' },
+      { id: '3', type: 'text', content: 'Chapter Title', x: 50, y: 210, width: 500, height: 50, fontSize: 32, bold: true, color: '#ffffff', fontFamily: 'monospace' },
+    ]
+  },
+  {
+    id: 'zen-minimal',
+    name: 'Zen Minimal',
+    category: 'Chapter Pages',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fafafa" width="400" height="600"/%3E%3Ccircle cx="200" cy="150" r="40" fill="none" stroke="%23000" stroke-width="0.5"/%3E%3Ctext x="200" y="250" text-anchor="middle" font-size="24" font-weight="300" fill="%23000" font-family="Georgia"%3EChapter One%3C/text%3E%3Ctext x="200" y="550" text-anchor="middle" font-size="48" font-weight="100" fill="%23ccc"%3E1%3C/text%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: false,
+    description: 'Peaceful zen-inspired minimalist layout',
+    elements: [
+      { id: '1', type: 'shape', content: 'circle', x: 250, y: 100, width: 100, height: 100, backgroundColor: 'transparent' },
+      { id: '2', type: 'text', content: 'Chapter One', x: 150, y: 220, width: 300, height: 40, fontSize: 24, align: 'center', color: '#000000', fontFamily: 'Georgia' },
+      { id: '3', type: 'text', content: '1', x: 250, y: 500, width: 100, height: 60, fontSize: 48, align: 'center', color: '#cccccc' },
+    ]
+  },
+  {
+    id: 'comic-pop',
+    name: 'Comic Pop Art',
+    category: 'Modern',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fff200" width="400" height="600"/%3E%3Ctext x="200" y="250" text-anchor="middle" font-size="64" font-weight="900" fill="%23000" font-family="Impact" stroke="%23fff" stroke-width="4"%3ECHAPTER%3C/text%3E%3Ctext x="200" y="350" text-anchor="middle" font-size="96" font-weight="900" fill="%23ff0000" font-family="Impact" stroke="%23000" stroke-width="3"%3E1%3C/text%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: true,
+    description: 'Bold comic book pop art styling',
+    elements: [
+      { id: '1', type: 'text', content: 'CHAPTER', x: 100, y: 180, width: 400, height: 80, fontSize: 64, align: 'center', bold: true, color: '#000000', fontFamily: 'Arial' },
+      { id: '2', type: 'text', content: '1', x: 200, y: 280, width: 200, height: 120, fontSize: 96, align: 'center', bold: true, color: '#ff0000', fontFamily: 'Arial' },
+    ]
+  },
+  {
+    id: 'newspaper-vintage',
+    name: 'Vintage Newspaper',
+    category: 'Classic',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23f5f5dc" width="400" height="600"/%3E%3Cline x1="50" y1="100" x2="350" y2="100" stroke="%23000" stroke-width="2"/%3E%3Ctext x="200" y="180" text-anchor="middle" font-size="48" font-weight="bold" fill="%23000" font-family="Times"%3ECHAPTER I%3C/text%3E%3Cline x1="50" y1="200" x2="350" y2="200" stroke="%23000" stroke-width="1"/%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: false,
+    description: 'Classic newspaper column layout',
+    elements: [
+      { id: '1', type: 'line', content: '', x: 50, y: 100, width: 500, height: 2, color: '#000000' },
+      { id: '2', type: 'text', content: 'CHAPTER I', x: 100, y: 130, width: 400, height: 70, fontSize: 48, align: 'center', bold: true, color: '#000000', fontFamily: 'Times' },
+      { id: '3', type: 'line', content: '', x: 50, y: 210, width: 500, height: 1, color: '#000000' },
+    ]
+  },
+  {
+    id: 'storybook-fantasy',
+    name: 'Fantasy Storybook',
+    category: 'Classic',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fef6e4" width="400" height="600"/%3E%3Ctext x="200" y="120" text-anchor="middle" font-size="32" fill="%238b4513"%3E✦%3C/text%3E%3Ctext x="200" y="200" text-anchor="middle" font-size="36" font-style="italic" font-weight="600" fill="%238b4513" font-family="Georgia"%3EChapter the First%3C/text%3E%3Ctext x="200" y="280" text-anchor="middle" font-size="32" fill="%238b4513"%3E✦%3C/text%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: true,
+    description: 'Whimsical fantasy storybook style',
+    elements: [
+      { id: '1', type: 'ornament', content: '✦', x: 250, y: 80, width: 100, height: 50 },
+      { id: '2', type: 'text', content: 'Chapter the First', x: 100, y: 150, width: 400, height: 70, fontSize: 36, align: 'center', italic: true, bold: true, color: '#8b4513', fontFamily: 'Georgia' },
+      { id: '3', type: 'ornament', content: '✦', x: 250, y: 240, width: 100, height: 50 },
+    ]
+  },
+  {
+    id: 'brutalist-bold',
+    name: 'Brutalist Bold',
+    category: 'Modern',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23000" width="400" height="600"/%3E%3Crect fill="%23fff" x="50" y="150" width="300" height="120"/%3E%3Ctext x="200" y="230" text-anchor="middle" font-size="56" font-weight="900" fill="%23000" font-family="Arial"%3ECHAPTER%3C/text%3E%3Ctext x="200" y="350" text-anchor="middle" font-size="120" font-weight="900" fill="%23fff" font-family="Arial"%3E1%3C/text%3E%3C/svg%3E',
+    isPremium: true,
+    isTrending: true,
+    description: 'Bold brutalist architecture-inspired design',
+    elements: [
+      { id: '1', type: 'shape', content: 'rectangle', x: 50, y: 150, width: 500, height: 120, backgroundColor: '#ffffff' },
+      { id: '2', type: 'text', content: 'CHAPTER', x: 100, y: 180, width: 400, height: 70, fontSize: 56, align: 'center', bold: true, color: '#000000', fontFamily: 'Arial' },
+      { id: '3', type: 'text', content: '1', x: 200, y: 290, width: 200, height: 140, fontSize: 120, align: 'center', bold: true, color: '#ffffff', fontFamily: 'Arial' },
+    ]
+  },
+  {
+    id: 'script-elegant',
+    name: 'Elegant Script',
+    category: 'Classic',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fff" width="400" height="600"/%3E%3Ctext x="200" y="220" text-anchor="middle" font-size="48" font-style="italic" fill="%234a4a4a" font-family="Georgia"%3EChapter One%3C/text%3E%3Cline x1="100" y1="250" x2="300" y2="250" stroke="%23d4af37" stroke-width="1"/%3E%3C/svg%3E',
+    isPremium: false,
+    isTrending: false,
+    description: 'Elegant flowing script typography',
+    elements: [
+      { id: '1', type: 'text', content: 'Chapter One', x: 100, y: 170, width: 400, height: 70, fontSize: 48, align: 'center', italic: true, color: '#4a4a4a', fontFamily: 'Georgia' },
+      { id: '2', type: 'line', content: '', x: 150, y: 250, width: 300, height: 1, color: '#d4af37' },
     ]
   },
 ]
