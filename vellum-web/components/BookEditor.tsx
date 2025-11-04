@@ -21,6 +21,8 @@ export default function BookEditor() {
   const [viewMode, setViewMode] = useState<ViewMode>('content')
   const [showExportMenu, setShowExportMenu] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [isExporting, setIsExporting] = useState(false)
+  const [exportStatus, setExportStatus] = useState<string | null>(null)
 
   if (!currentProject) {
     return (
@@ -41,18 +43,37 @@ export default function BookEditor() {
 
   const handleExport = async (format: 'pdf' | 'epub' | 'kindle' | 'apple' | 'all') => {
     setShowExportMenu(false)
+    setIsExporting(true)
+    setExportStatus(null)
 
     try {
       if (format === 'all') {
+        setExportStatus('Generating PDF...')
         await exportToFormat('pdf')
         await new Promise(resolve => setTimeout(resolve, 1000))
+        setExportStatus('Generating EPUB...')
         await exportToFormat('epub')
+        setExportStatus('✅ All formats exported successfully!')
       } else {
+        const formatNames: Record<string, string> = {
+          pdf: 'PDF',
+          epub: 'EPUB',
+          kindle: 'Kindle',
+          apple: 'Apple Books'
+        }
+        setExportStatus(`Generating ${formatNames[format]}...`)
         await exportToFormat(format)
+        setExportStatus(`✅ ${formatNames[format]} exported successfully!`)
       }
+
+      // Clear success message after 3 seconds
+      setTimeout(() => setExportStatus(null), 3000)
     } catch (error) {
       console.error('Export error:', error)
-      alert('Export failed. Please try again.')
+      setExportStatus('❌ Export failed. Please try again.')
+      setTimeout(() => setExportStatus(null), 5000)
+    } finally {
+      setIsExporting(false)
     }
   }
 
@@ -69,11 +90,15 @@ export default function BookEditor() {
           .join('\n\n'),
         title: currentProject.title,
         authors: [currentProject.author],
+        style: currentProject.selectedStyle || 'luxury-lab',
         contentType: 'html',
       }),
     })
 
-    if (!response.ok) throw new Error('Export failed')
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+      throw new Error(errorData.error || 'Export failed')
+    }
 
     const blob = await response.blob()
     const url = window.URL.createObjectURL(blob)
@@ -132,11 +157,21 @@ export default function BookEditor() {
             <div className="relative">
               <button
                 onClick={() => setShowExportMenu(!showExportMenu)}
-                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl transition-all duration-200 flex items-center gap-2 font-medium text-sm shadow-lg hover:shadow-xl hover:scale-105"
+                disabled={isExporting}
+                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl transition-all duration-200 flex items-center gap-2 font-medium text-sm shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <Download className="w-4 h-4" />
-                Generate Book
-                <Sparkles className="w-4 h-4" />
+                {isExporting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Exporting...
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4" />
+                    Generate Book
+                    <Sparkles className="w-4 h-4" />
+                  </>
+                )}
               </button>
 
               {showExportMenu && (
@@ -182,6 +217,24 @@ export default function BookEditor() {
           </div>
         </div>
       </header>
+
+      {/* Export Status Notification */}
+      {exportStatus && (
+        <div className="bg-slate-800/95 backdrop-blur-xl border-b border-white/10 px-8 py-3">
+          <div className="flex items-center justify-center gap-2 text-sm">
+            {exportStatus.startsWith('✅') ? (
+              <div className="text-green-400 font-medium">{exportStatus}</div>
+            ) : exportStatus.startsWith('❌') ? (
+              <div className="text-red-400 font-medium">{exportStatus}</div>
+            ) : (
+              <>
+                <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                <div className="text-blue-400 font-medium">{exportStatus}</div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Three-Column Premium Layout */}
       <div className="flex-1 flex overflow-hidden">
