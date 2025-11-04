@@ -1,0 +1,329 @@
+
+<!doctype html>
+<html lang="en-GB">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+  	<meta name="author" content="Create 8">
+	<meta name="google-site-verification" content="HBD4rzyzz_-gaJVSg-n0kGM8tCmmRFxecJtQgAzd6aU" />
+
+	<meta name='robots' content='noindex, follow' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO plugin v26.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Page not found - InDesignSkills</title>
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:title" content="Page not found - InDesignSkills" />
+	<meta property="og:site_name" content="InDesignSkills" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.indesignskills.com/#website","url":"https://www.indesignskills.com/","name":"InDesignSkills","description":"Bitesize Tips, Tutorials &amp; Inspiration for Adobe InDesign","publisher":{"@id":"https://www.indesignskills.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.indesignskills.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-GB"},{"@type":"Organization","@id":"https://www.indesignskills.com/#organization","name":"InDesignSkills","url":"https://www.indesignskills.com/","logo":{"@type":"ImageObject","inLanguage":"en-GB","@id":"https://www.indesignskills.com/#/schema/logo/image/","url":"https://www.indesignskills.com/wp-content/uploads/2021/09/ids-logo.svg","contentUrl":"https://www.indesignskills.com/wp-content/uploads/2021/09/ids-logo.svg","width":1,"height":1,"caption":"InDesignSkills"},"image":{"@id":"https://www.indesignskills.com/#/schema/logo/image/"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='preconnect' href='//i0.wp.com' />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.indesignskills.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=7c12a59b43d9ac41519e428c87488d3b"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.indesignskills.com/wp-includes/css/dist/block-library/style.min.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://www.indesignskills.com/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.17' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://www.indesignskills.com/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<style id='jetpack-sharing-buttons-style-inline-css' type='text/css'>
+.jetpack-sharing-buttons__services-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:0;list-style-type:none;margin:5px;padding:0}.jetpack-sharing-buttons__services-list.has-small-icon-size{font-size:12px}.jetpack-sharing-buttons__services-list.has-normal-icon-size{font-size:16px}.jetpack-sharing-buttons__services-list.has-large-icon-size{font-size:24px}.jetpack-sharing-buttons__services-list.has-huge-icon-size{font-size:36px}@media print{.jetpack-sharing-buttons__services-list{display:none!important}}.editor-styles-wrapper .wp-block-jetpack-sharing-buttons{gap:0;padding-inline-start:0}ul.jetpack-sharing-buttons__services-list.has-background{padding:1.25em 2.375em}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='search-filter-plugin-styles-css' href='https://www.indesignskills.com/wp-content/plugins/search-filter-pro/public/assets/css/search-filter.min.css?ver=2.5.21' type='text/css' media='all' />
+<link rel='stylesheet' id='indesignskills-reset-style-css' href='https://www.indesignskills.com/wp-content/themes/indesignskills/assets/css/reset.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<link rel='stylesheet' id='indesignskills-custom-style-css' href='https://www.indesignskills.com/wp-content/themes/indesignskills/assets/css/style.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<link rel='stylesheet' id='indesignskills-options-style-css' href='https://www.indesignskills.com/wp-content/themes/indesignskills/assets/css/options-styles.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<link rel='stylesheet' id='lepopup-style-css' href='https://www.indesignskills.com/wp-content/plugins/halfdata-green-popups/css/style.css?ver=7.53' type='text/css' media='all' />
+<link rel='stylesheet' id='airdatepicker-css' href='https://www.indesignskills.com/wp-content/plugins/halfdata-green-popups/css/airdatepicker.css?ver=7.53' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.indesignskills.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="search-filter-plugin-build-js-extra">
+/* <![CDATA[ */
+var SF_LDATA = {"ajax_url":"https:\/\/www.indesignskills.com\/wp-admin\/admin-ajax.php","home_url":"https:\/\/www.indesignskills.com\/","extensions":[]};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-content/plugins/search-filter-pro/public/assets/js/search-filter-build.min.js?ver=2.5.21" id="search-filter-plugin-build-js"></script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-content/plugins/search-filter-pro/public/assets/js/chosen.jquery.min.js?ver=2.5.21" id="search-filter-plugin-chosen-js"></script>
+<link rel="https://api.w.org/" href="https://www.indesignskills.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.indesignskills.com/xmlrpc.php?rsd" />
+
+
+<script data-cfasync='false'  src='//monu.delivery/site/6/0/f8013b-06a6-4b74-a263-e3cd3f4a1cb5.js' type='text/javascript'></script>
+<link rel="shortcut icon" href="https://www.indesignskills.com/wp-content/uploads/2023/04/cropped-FavIcon.png"/>
+
+		<script>var lepopup_customjs_handlers={};var lepopup_cookie_value="ilovefamily";var lepopup_events_data={};var lepopup_content_id="0";</script><script>function lepopup_add_event(_event,_data){if(typeof _lepopup_add_event == typeof undefined){jQuery(document).ready(function(){_lepopup_add_event(_event,_data);});}else{_lepopup_add_event(_event,_data);}}</script><link rel="icon" href="https://i0.wp.com/www.indesignskills.com/wp-content/uploads/2021/10/cropped-favicon.png?fit=32%2C32&#038;ssl=1" sizes="32x32" />
+<link rel="icon" href="https://i0.wp.com/www.indesignskills.com/wp-content/uploads/2021/10/cropped-favicon.png?fit=192%2C192&#038;ssl=1" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://i0.wp.com/www.indesignskills.com/wp-content/uploads/2021/10/cropped-favicon.png?fit=180%2C180&#038;ssl=1" />
+<meta name="msapplication-TileImage" content="https://i0.wp.com/www.indesignskills.com/wp-content/uploads/2021/10/cropped-favicon.png?fit=270%2C270&#038;ssl=1" />
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<script src="https://developers.gettyimages.com/libs/affiliate/1.0/istock.js"></script>
+	
+<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6MZ9S6KG2"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-E6MZ9S6KG2'); </script>
+	
+	
+    <style>strong {
+    font-weight: 700;
+}
+figcaption {
+  margin-top:10px;
+}
+figure {
+    max-width: 100%;
+}</style>
+    <script>
+
+jQuery.event.special.touchstart = {
+    setup: function( _, ns, handle ) {
+        this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
+    }
+};
+jQuery.event.special.touchmove = {
+    setup: function( _, ns, handle ) {
+        this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+    }
+};
+jQuery.event.special.wheel = {
+    setup: function( _, ns, handle ){
+        this.addEventListener("wheel", handle, { passive: true });
+    }
+};
+jQuery.event.special.mousewheel = {
+    setup: function( _, ns, handle ){
+        this.addEventListener("mousewheel", handle, { passive: true });
+    }
+};
+
+    </script>
+	
+</head>
+
+<body class="error404 wp-theme-indesignskills">
+<a class="screen-reader-text" href="#content">Skip to content</a>
+
+<div id="content" class="site-content">
+
+
+<header class="site-header" id="header">
+
+	<h1 class="site-title">
+		    		<a href="https://www.indesignskills.com">
+				<img src="https://www.indesignskills.com/wp-content/uploads/2021/09/ids-logo.svg" class="logo" alt="InDesignSkills" title="InDesignSkills" />
+			</a>
+			</h1>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  
+  <label for="nav-toggle" class="nav-toggle-label">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+
+	<nav class="main-navigation">
+		<div class="menu-main-menu-container"><ul id="primary-menu" class="menu"><li id="menu-item-42" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-42"><a href="/tutorials/">Tutorials</a></li>
+<li id="menu-item-43" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-43"><a href="/free-indesign-templates/">Templates</a></li>
+<li id="menu-item-44" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-44"><a href="/inspiration/">Inspiration</a></li>
+</ul></div>		<div class="search-head mobile">
+                
+
+        <form data-sf-form-id='14609' data-is-rtl='0' data-maintain-state='' data-results-url='https://www.indesignskills.com/search-results/' data-ajax-url='https://www.indesignskills.com/search-results/?sf_data=results' data-ajax-form-url='https://www.indesignskills.com/?sfid=14609&amp;sf_action=get_data&amp;sf_data=form' data-display-result-method='archive' data-use-history-api='1' data-template-loaded='0' data-lang-code='en' data-ajax='1' data-ajax-data-type='html' data-ajax-links-selector='.pagination a' data-ajax-target='#posts-all' data-ajax-pagination-type='normal' data-update-ajax-url='1' data-only-results-ajax='1' data-scroll-to-pos='0' data-init-paged='1' data-auto-update='1' action='https://www.indesignskills.com/search-results/' method='post' class='searchandfilter' id='search-filter-form-14609' autocomplete='off' data-instance-count='1'><ul><li class="sf-field-search" data-sf-field-name="search" data-sf-field-type="search" data-sf-field-input-type="">		<label>
+				   <input placeholder="Search …" name="_sf_search[]" class="sf-input-text" type="text" value="" title=""></label>		</li></ul></form>    </div>
+	</nav>
+
+    <div class="search-head">
+                
+
+        <form data-sf-form-id='14609' data-is-rtl='0' data-maintain-state='' data-results-url='https://www.indesignskills.com/search-results/' data-ajax-url='https://www.indesignskills.com/search-results/?sf_data=results' data-ajax-form-url='https://www.indesignskills.com/?sfid=14609&amp;sf_action=get_data&amp;sf_data=form' data-display-result-method='archive' data-use-history-api='1' data-template-loaded='0' data-lang-code='en' data-ajax='1' data-ajax-data-type='html' data-ajax-links-selector='.pagination a' data-ajax-target='#posts-all' data-ajax-pagination-type='normal' data-update-ajax-url='1' data-only-results-ajax='1' data-scroll-to-pos='0' data-init-paged='1' data-auto-update='1' action='https://www.indesignskills.com/search-results/' method='post' class='searchandfilter' id='search-filter-form-14609' autocomplete='off' data-instance-count='2'><ul><li class="sf-field-search" data-sf-field-name="search" data-sf-field-type="search" data-sf-field-input-type="">		<label>
+				   <input placeholder="Search …" name="_sf_search[]" class="sf-input-text" type="text" value="" title=""></label>		</li></ul></form>    </div>
+</header>
+
+<style>
+.search-head.mobile {
+	display:none;
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+
+.search-head.mobile {
+    display: flex;
+    justify-content: center;
+}
+}
+</style>
+
+
+
+
+<style>
+.content-404 {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:400px;
+}
+
+.inner-404 {
+    text-align:center;
+}
+
+.inner-404 h2 {
+    font-size:100px;
+}
+</style> 
+
+<main id="main" class="site-main" role="main">
+
+	<section class="page-section content-404">
+        <div class="inner-404">
+			<h2>404</h2>
+			<p>Opps... Page not found. <a href="https://www.indesignskills.com">Return home</a></p>
+        </div>
+	</section>
+
+</main>
+
+
+</div>
+
+
+
+<div id="popup-overlay" class="hidden">
+    <div class="pop-content grid grid-gap">
+        <button id="close" aria-label="Close Popup"><i class="fas fa-times"></i></button>
+
+        <div class="popup-info grid grid-gap">
+            <h3>Sign up to our newsletter and get a FREE eBook</h3>
+			
+			<!-- Begin Mailchimp Signup Form -->
+<div id="mc_embed_signup">
+<form action="https://indesignskills.us9.list-manage.com/subscribe/post?u=413917e5894382e622407430c&amp;id=ecd1a26b3e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Email Address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_413917e5894382e622407430c_ecd1a26b3e" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+			
+                <p>Receive a copy of 10 Essential InDesign Skills, plus get monthly updates on new templates, fresh design inspiration and unmissable offers for creatives! </p>
+          
+        </div>
+        <div class="popup-image" style="background-image:url(https://www.indesignskills.com/wp-content/uploads/2022/05/business-cards-league-spartan.gif);">
+
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-inner grid grid-col-thirds">
+<div class="footer-logo">
+    		<a href="https://www.indesignskills.com">
+				<img src="https://www.indesignskills.com/wp-content/uploads/2021/09/ids-logo-alt.svg" class="logo" alt="InDesignSkills" title="InDesignSkills" />
+			</a>
+</div>
+<div class="about">
+    <h3>About us</h3>
+    <p>InDesignSkills makes learning InDesign fun! We offer tutorials, quick tips free stylish templates and inspiration. InDesignSkills is run by a community of graphic designers, illustrators and print experts.</p>
+</div>
+<div class="socials">
+    <h3>Follow us</h3>
+
+    
+    	    <a href="https://twitter.com/indesignskills" target="_blank" rel="noreferrer">
+            <i class="fab fa-twitter"></i>
+        </a>
+    
+    	    <a href="https://www.instagram.com/indesignskills/" target="_blank" rel="noreferrer">
+            <i class="fab fa-instagram"></i>
+        </a>
+    
+    	    <a href="https://www.pinterest.com/indesignskills" target="_blank" rel="noreferrer">
+            <i class="fab fa-pinterest-p"></i>
+        </a>
+    </div>
+<div></footer>
+
+<div class="copyright">
+    <div class="inner-copy">
+        <div>
+            &copy; InDesignSkills 2025. Website by <a href="https://www.create8.co.uk/" target="_blank" rel="noreferrer nofollow">Create8</a>.
+        </div> 
+        <div class="footer-links">
+            <div class="menu-footer-menu-container"><ul id="secondary-menu" class="menu"><li id="menu-item-14628" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14628"><a href="https://www.indesignskills.com/license/">License</a></li>
+<li id="menu-item-14629" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-14629"><a rel="privacy-policy" href="https://www.indesignskills.com/privacy/">Privacy</a></li>
+<li id="menu-item-14631" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14631"><a href="https://www.indesignskills.com/free-indesign-ebook/">Free eBook</a></li>
+<li id="menu-item-14630" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14630"><a href="https://www.indesignskills.com/contact/">Contact</a></li>
+</ul></div>        </div>
+    </div>
+</div>
+
+<button onclick="topFunction()" id="go-to-top" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/indesignskills\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<link rel='stylesheet' id='indesignskills-style-css' href='https://www.indesignskills.com/wp-content/themes/indesignskills/style.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<link rel='stylesheet' id='sofia-pro-css' href='https://fonts.cdnfonts.com/css/sofia-pro?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<link rel='stylesheet' id='load-fatop-css' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-css-css' href='https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css?ver=7c12a59b43d9ac41519e428c87488d3b' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.indesignskills.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.13.3" id="jquery-ui-datepicker-js"></script>
+<script type="text/javascript" id="jquery-ui-datepicker-js-after">
+/* <![CDATA[ */
+jQuery(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Close","currentText":"Today","monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Previous","dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"dateFormat":"MM d, yy","firstDay":1,"isRTL":false});});
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-content/plugins/halfdata-green-popups/js/lepopup.js?ver=7.53" id="lepopup-js"></script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-content/plugins/halfdata-green-popups/js/airdatepicker.js?ver=7.53" id="airdatepicker-js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js?ver=7c12a59b43d9ac41519e428c87488d3b" id="slick-js-js"></script>
+<script type="text/javascript" src="https://www.indesignskills.com/wp-content/themes/indesignskills/assets/js/scripts.js?ver=7c12a59b43d9ac41519e428c87488d3b" id="indesignskills-scripts-js"></script>
+
+<script>
+	var lepopup_ajax_url = "https://www.indesignskills.com/wp-admin/admin-ajax.php";
+	var lepopup_ga_tracking = "off";
+	var lepopup_abd_enabled = "off";
+	var lepopup_async_init = "on";
+	var lepopup_preload = "off";
+	var lepopup_overlays = {"paperbackbook":["13","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"architectureportfolio":["14","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"bookcover":["15","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"bookjacket":["16","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"botanicalsavethedate":["17","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"botanicalweddinginvitation":["18","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"christmas":["19","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"cleanbrochure":["20","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"collegebrochure":["21","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"corporatebrochure":["22","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"creativebusinesscard":["23","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"exitpopup":["24","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"fashionmagazine":["25","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"fashionmagazinecover":["26","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"fashionportfolio":["27","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"foodmagazine":["28","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"graphicbusinesscard":["29","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"menu":["30","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"minimalarchitectureportfolio":["31","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"modernbusinesscard":["32","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"newsletter":["33","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"photographymagazinecover":["34","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"photographyportfolio":["35","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"projectproposal":["36","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"realestatebrochure":["37","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"recipebook":["39","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"schoolbrochure":["40","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"simplebrochure":["41","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"simpleletterhead":["42","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"simpleresume":["43","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"terrazzobusinesscard":["44","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"travelmagazine":["45","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"typographicposter":["46","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"vintagebusinesscard":["47","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"zine":["48","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"moodboard":["49","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"colourpalettes":["50","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"],"photographymagazine":["51","middle-center","off","rgba(204, 204, 204, 0.8)","on","fadeIn","#ffffff","#ffffff","#ffffff","1"]};
+	var lepopup_campaigns = {};
+</script></body>
+</html>
+
+<!-- Page cached by LiteSpeed Cache 7.6.2 on 2025-11-03 17:43:46 -->

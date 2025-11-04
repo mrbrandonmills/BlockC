@@ -1,58 +1,81 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { Upload, FileText, BookOpen, Sparkles } from 'lucide-react'
+import { useState, useCallback } from 'react'
 import { useBookStore } from '@/lib/store'
+import { BookOpen, Upload, Sparkles, Zap, Palette } from 'lucide-react'
 
 interface WelcomeScreenProps {
   onImport: () => void
 }
 
 export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
+  const { createProject } = useBookStore()
   const [isDragging, setIsDragging] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const { createProject } = useBookStore()
 
-  const handleFileSelect = async (file: File) => {
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }, [])
+
+  const handleDrop = useCallback(async (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
     setIsProcessing(true)
+
+    const files = Array.from(e.dataTransfer.files)
+    const file = files[0]
+
+    if (file) {
+      await processFile(file)
+    }
+
+    setIsProcessing(false)
+  }, [])
+
+  const handleFileInput = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setIsProcessing(true)
+      await processFile(file)
+      setIsProcessing(false)
+    }
+  }, [])
+
+  const processFile = async (file: File) => {
     try {
-      const text = await file.text()
+      const content = await file.text()
+      const chapters = parseDocument(content, file.name)
 
-      // Parse the document and create chapters
-      const chapters = parseDocument(text, file.name)
-
-      // Create project
-      createProject(`${file.name.replace(/\.[^/.]+$/, "")}`, chapters)
-
+      createProject(file.name.replace(/\.[^/.]+$/, ''), chapters)
       onImport()
     } catch (error) {
-      console.error('Import error:', error)
-      alert('Failed to import file. Please try again.')
-    } finally {
-      setIsProcessing(false)
+      console.error('Error processing file:', error)
+      alert('Failed to process file. Please try again.')
     }
   }
 
   const parseDocument = (content: string, filename: string) => {
-    const ext = filename.split('.').pop()?.toLowerCase()
-
-    if (ext === 'md') {
-      return parseMarkdown(content)
-    } else {
-      // Simple text parsing - split by chapter headings
-      return parseText(content)
-    }
-  }
-
-  const parseMarkdown = (content: string) => {
     const lines = content.split('\n')
-    const chapters: Array<{ title: string; content: string; order: number }> = []
-    let currentChapter: { title: string; content: string; order: number } | null = null
-    let chapterOrder = 0
+    const chapters: Array<{ title: string; content: string; order: number; sectionType?: any }> = []
+
+    // Add title page
+    chapters.push({
+      title: 'Title Page',
+      content: '',
+      order: 0,
+      sectionType: 'title-page',
+    })
+
+    let currentChapter: any = null
+    let chapterOrder = 1
 
     for (const line of lines) {
-      // Detect h1 headers as chapter titles
       if (line.startsWith('# ')) {
         if (currentChapter) {
           chapters.push(currentChapter)
@@ -61,6 +84,7 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
           title: line.replace(/^# /, '').trim(),
           content: '',
           order: chapterOrder++,
+          sectionType: 'chapter',
         }
       } else if (currentChapter) {
         currentChapter.content += line + '\n'
@@ -71,206 +95,157 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
       chapters.push(currentChapter)
     }
 
-    // If no chapters found, create a single chapter
-    if (chapters.length === 0) {
+    if (chapters.length === 1) {
       chapters.push({
-        title: 'Chapter 1',
-        content,
-        order: 0,
+        title: filename.replace(/\.[^/.]+$/, ''),
+        content: content,
+        order: 1,
+        sectionType: 'chapter',
       })
     }
 
     return chapters
   }
 
-  const parseText = (content: string) => {
-    // Try to split by common chapter patterns
-    const chapterPattern = /(?:Chapter|CHAPTER|chapter)\s+(\d+|[IVXLCDM]+)/gi
-    const splits = content.split(chapterPattern)
-
-    if (splits.length > 1) {
-      const chapters: Array<{ title: string; content: string; order: number }> = []
-      for (let i = 1; i < splits.length; i += 2) {
-        const chapterNumber = splits[i]
-        const chapterContent = splits[i + 1] || ''
-        chapters.push({
-          title: `Chapter ${chapterNumber}`,
-          content: chapterContent.trim(),
-          order: Math.floor(i / 2),
-        })
-      }
-      return chapters
-    }
-
-    // No chapters found, return as single chapter
-    return [{
-      title: 'Untitled',
-      content,
-      order: 0,
-    }]
-  }
-
-  const handleDrop = async (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-
-    const files = Array.from(e.dataTransfer.files)
-    const file = files[0]
-
-    if (file && (file.name.endsWith('.md') || file.name.endsWith('.txt') || file.name.endsWith('.pdf'))) {
-      await handleFileSelect(file)
-    } else {
-      alert('Please upload a .md, .txt, or .pdf file')
-    }
-  }
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = () => {
-    setIsDragging(false)
-  }
-
-  const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      await handleFileSelect(file)
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center p-6">
-      <div className="max-w-4xl w-full">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-8 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10 max-w-5xl w-full">
         {/* Logo and Title */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center mb-6">
-            {/* Geometric Logo */}
-            <div className="relative w-20 h-20">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl transform rotate-12 opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl transform -rotate-12" />
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="flex justify-center mb-8">
+            <div className="relative w-32 h-32 group cursor-pointer">
+              {/* Geometric logo with multiple layers */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-3xl transform rotate-12 opacity-80 group-hover:rotate-45 transition-all duration-700 ease-out shadow-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-pink-500 to-orange-500 rounded-3xl transform -rotate-12 group-hover:-rotate-45 transition-all duration-700 ease-out shadow-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 rounded-3xl group-hover:scale-110 transition-all duration-700 ease-out shadow-2xl" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <BookOpen className="w-10 h-10 text-white drop-shadow-lg" />
+                <BookOpen className="w-16 h-16 text-white drop-shadow-2xl" strokeWidth={1.5} />
               </div>
             </div>
           </div>
 
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
-            Vellum Book Designer
+          <h1 className="text-7xl font-bold text-white mb-6 tracking-tight">
+            Vellum
           </h1>
-
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Professional book formatting made simple and free.
-            <span className="block text-sm mt-2 text-gray-500">
-              Import your manuscript and create a beautiful book in minutes.
-            </span>
+          <p className="text-2xl text-gray-300 font-light mb-3">
+            Professional Book Designer
+          </p>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Transform your manuscript into a beautifully formatted book.
+            Import, design, and export to any platform.
           </p>
         </div>
 
-        {/* Import Area */}
-        <div
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          className={`relative bg-white rounded-3xl shadow-xl border-2 transition-all duration-300 ${
-            isDragging
-              ? 'border-blue-500 bg-blue-50 scale-105'
-              : 'border-gray-200 hover:border-gray-300'
-          }`}
-        >
-          <div className="p-16 text-center">
-            {isProcessing ? (
-              <div className="space-y-4">
-                <div className="inline-block">
-                  <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    Processing your manuscript...
+        {/* Upload area */}
+        <div className="mb-12">
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={`relative backdrop-blur-xl bg-white/10 border-2 border-dashed rounded-3xl p-16 transition-all duration-300 ${
+              isDragging
+                ? 'border-blue-400 bg-blue-500/20 scale-105 shadow-2xl'
+                : 'border-white/30 hover:border-white/50 hover:bg-white/15'
+            }`}
+          >
+            <input
+              type="file"
+              accept=".md,.txt,.pdf,.docx"
+              onChange={handleFileInput}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              disabled={isProcessing}
+            />
+
+            <div className="text-center pointer-events-none">
+              {isProcessing ? (
+                <>
+                  <div className="w-20 h-20 mx-auto mb-6 relative">
+                    <div className="absolute inset-0 rounded-full border-4 border-purple-500/30" />
+                    <div className="absolute inset-0 rounded-full border-4 border-purple-500 border-t-transparent animate-spin" />
+                  </div>
+                  <h3 className="text-2xl font-semibold text-white mb-2">Processing your manuscript...</h3>
+                  <p className="text-gray-400">This will just take a moment</p>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-20 h-20 mx-auto mb-6 text-white/80" strokeWidth={1.5} />
+                  <h3 className="text-3xl font-semibold text-white mb-3">
+                    Drop your manuscript here
                   </h3>
-                  <p className="text-gray-600">
-                    We're analyzing your content and creating chapters
+                  <p className="text-lg text-gray-300 mb-2">
+                    or click to browse
                   </p>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="mb-8">
-                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full mb-6">
-                    <Upload className="w-12 h-12 text-blue-600" />
-                  </div>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                    Import Your Manuscript
-                  </h2>
-
-                  <p className="text-gray-600 mb-8 max-w-lg mx-auto">
-                    Drag and drop your file here, or click to browse.
-                    We support Markdown (.md), Text (.txt), and PDF files.
+                  <p className="text-sm text-gray-400">
+                    Supports Markdown (.md), Text (.txt), PDF, and Word (.docx)
                   </p>
-
-                  <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-                  >
-                    <FileText className="w-5 h-5" />
-                    Choose File
-                  </button>
-
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".md,.txt,.pdf,.doc,.docx"
-                    onChange={handleFileInputChange}
-                    className="hidden"
-                  />
-                </div>
-
-                {/* Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-200">
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mb-3">
-                      <Sparkles className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Smart Parsing</h3>
-                    <p className="text-sm text-gray-600">
-                      Automatically detects chapters and structure
-                    </p>
-                  </div>
-
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl mb-3">
-                      <BookOpen className="w-6 h-6 text-purple-600" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Professional Styles</h3>
-                    <p className="text-sm text-gray-600">
-                      Choose from beautiful pre-made templates
-                    </p>
-                  </div>
-
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-pink-100 rounded-xl mb-3">
-                      <FileText className="w-6 h-6 text-pink-600" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Export Anywhere</h3>
-                    <p className="text-sm text-gray-600">
-                      PDF, EPUB, Kindle, Apple Books, and more
-                    </p>
-                  </div>
-                </div>
-              </>
-            )}
+                </>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="text-center mt-8 text-sm text-gray-500">
-          <p>
-            Free alternative to Vellum ($249.99) • Built with love for indie authors
-          </p>
+        {/* Features grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: Sparkles,
+              title: 'Smart Import',
+              description: 'Automatically detects chapters and structure',
+            },
+            {
+              icon: Palette,
+              title: 'Beautiful Styles',
+              description: '5 professional templates for any genre',
+            },
+            {
+              icon: Zap,
+              title: 'Multi-Platform',
+              description: 'Export to PDF, EPUB, Kindle, and Apple Books',
+            },
+          ].map((feature, index) => (
+            <div
+              key={index}
+              className="backdrop-blur-xl bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            >
+              <feature.icon className="w-12 h-12 text-purple-400 mb-4" strokeWidth={1.5} />
+              <h4 className="text-xl font-semibold text-white mb-2">{feature.title}</h4>
+              <p className="text-gray-400">{feature.description}</p>
+            </div>
+          ))}
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 1s ease-out;
+        }
+      `}</style>
     </div>
   )
 }

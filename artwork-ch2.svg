@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Chapter II: Technology as Mirror -->
+
+  <!-- Screen/Mirror outline -->
+  <rect x="100" y="100" width="400" height="400" rx="10" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+  <rect x="110" y="110" width="380" height="380" rx="8" fill="none" stroke="#00CED1" stroke-width="1"/>
+
+  <!-- Face silhouette (left half) -->
+  <ellipse cx="250" cy="300" rx="80" ry="120" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+  <circle cx="230" cy="280" r="8" fill="#1A1A1A"/>
+
+  <!-- Neural network pattern (right half - reflection) -->
+  <g opacity="0.8">
+    <!-- Nodes -->
+    <circle cx="350" cy="200" r="6" fill="#00CED1"/>
+    <circle cx="380" cy="240" r="6" fill="#00CED1"/>
+    <circle cx="320" cy="260" r="6" fill="#00CED1"/>
+    <circle cx="370" cy="300" r="6" fill="#00CED1"/>
+    <circle cx="340" cy="340" r="6" fill="#00CED1"/>
+    <circle cx="380" cy="380" r="6" fill="#00CED1"/>
+    <circle cx="420" cy="320" r="6" fill="#00CED1"/>
+
+    <!-- Connections -->
+    <line x1="350" y1="200" x2="380" y2="240" stroke="#00CED1" stroke-width="1"/>
+    <line x1="350" y1="200" x2="320" y2="260" stroke="#00CED1" stroke-width="1"/>
+    <line x1="380" y1="240" x2="370" y2="300" stroke="#00CED1" stroke-width="1"/>
+    <line x1="320" y1="260" x2="370" y2="300" stroke="#00CED1" stroke-width="1"/>
+    <line x1="370" y1="300" x2="340" y2="340" stroke="#00CED1" stroke-width="1"/>
+    <line x1="370" y1="300" x2="420" y2="320" stroke="#00CED1" stroke-width="1"/>
+    <line x1="340" y1="340" x2="380" y2="380" stroke="#00CED1" stroke-width="1"/>
+    <line x1="420" y1="320" x2="380" y2="380" stroke="#00CED1" stroke-width="1"/>
+  </g>
+
+  <!-- Frequency waves emanating from device -->
+  <g opacity="0.5">
+    <path d="M 300,500 Q 200,520 100,500" fill="none" stroke="#FFB347" stroke-width="1.5"/>
+    <path d="M 300,510 Q 180,535 80,515" fill="none" stroke="#FFB347" stroke-width="1.2"/>
+    <path d="M 300,520 Q 160,550 60,530" fill="none" stroke="#FFB347" stroke-width="0.9"/>
+
+    <path d="M 300,500 Q 400,520 500,500" fill="none" stroke="#FFB347" stroke-width="1.5"/>
+    <path d="M 300,510 Q 420,535 520,515" fill="none" stroke="#FFB347" stroke-width="1.2"/>
+    <path d="M 300,520 Q 440,550 540,530" fill="none" stroke="#FFB347" stroke-width="0.9"/>
+  </g>
+
+  <!-- Frequency labels -->
+  <text x="50" y="550" font-family="monospace" font-size="12" fill="#2F4F4F">261.63 Hz</text>
+  <text x="470" y="550" font-family="monospace" font-size="12" fill="#2F4F4F">528 Hz</text>
+
+  <!-- Center dividing line -->
+  <line x1="300" y1="110" x2="300" y2="490" stroke="#2F4F4F" stroke-width="0.5" stroke-dasharray="5,3" opacity="0.4"/>
+
+  <!-- Circuit pattern in corners -->
+  <g opacity="0.3" stroke="#2F4F4F" stroke-width="0.8" fill="none">
+    <path d="M 120,120 L 140,120 L 140,135 L 155,135"/>
+    <circle cx="158" cy="135" r="2" fill="#2F4F4F"/>
+    <path d="M 480,120 L 460,120 L 460,135 L 445,135"/>
+    <circle cx="442" cy="135" r="2" fill="#2F4F4F"/>
+  </g>
+
+  <!-- Measurement marks -->
+  <g stroke="#2F4F4F" stroke-width="0.5" opacity="0.4">
+    <line x1="95" y1="150" x2="105" y2="150"/>
+    <line x1="95" y1="200" x2="105" y2="200"/>
+    <line x1="95" y1="250" x2="105" y2="250"/>
+    <line x1="95" y1="300" x2="105" y2="300"/>
+    <line x1="95" y1="350" x2="105" y2="350"/>
+    <line x1="95" y1="400" x2="105" y2="400"/>
+    <line x1="95" y1="450" x2="105" y2="450"/>
+  </g>
+</svg>

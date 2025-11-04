@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laboratory Entrance - Sacred Geometry Portal -->
+
+  <!-- Background concentric circles -->
+  <circle cx="300" cy="400" r="350" fill="none" stroke="#2F4F4F" stroke-width="0.5" opacity="0.3"/>
+  <circle cx="300" cy="400" r="300" fill="none" stroke="#2F4F4F" stroke-width="0.5" opacity="0.4"/>
+  <circle cx="300" cy="400" r="250" fill="none" stroke="#2F4F4F" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Central doorway/portal -->
+  <rect x="220" y="200" width="160" height="400" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+  <rect x="230" y="210" width="140" height="380" fill="none" stroke="#00CED1" stroke-width="1"/>
+
+  <!-- Sacred geometry - Flower of Life pattern in center -->
+  <g opacity="0.6">
+    <circle cx="300" cy="400" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="270" cy="348" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="330" cy="348" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="270" cy="452" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="330" cy="452" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="240" cy="400" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="360" cy="400" r="60" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+  </g>
+
+  <!-- Corner brackets -->
+  <line x1="200" y1="180" x2="200" y2="220" stroke="#00CED1" stroke-width="2"/>
+  <line x1="200" y1="180" x2="240" y2="180" stroke="#00CED1" stroke-width="2"/>
+
+  <line x1="400" y1="180" x2="400" y2="220" stroke="#00CED1" stroke-width="2"/>
+  <line x1="400" y1="180" x2="360" y2="180" stroke="#00CED1" stroke-width="2"/>
+
+  <line x1="200" y1="620" x2="200" y2="580" stroke="#00CED1" stroke-width="2"/>
+  <line x1="200" y1="620" x2="240" y2="620" stroke="#00CED1" stroke-width="2"/>
+
+  <line x1="400" y1="620" x2="400" y2="580" stroke="#00CED1" stroke-width="2"/>
+  <line x1="400" y1="620" x2="360" y2="620" stroke="#00CED1" stroke-width="2"/>
+
+  <!-- Radial lines from center -->
+  <g opacity="0.2">
+    <line x1="300" y1="400" x2="100" y2="100" stroke="#2F4F4F" stroke-width="0.5"/>
+    <line x1="300" y1="400" x2="500" y2="100" stroke="#2F4F4F" stroke-width="0.5"/>
+    <line x1="300" y1="400" x2="100" y2="700" stroke="#2F4F4F" stroke-width="0.5"/>
+    <line x1="300" y1="400" x2="500" y2="700" stroke="#2F4F4F" stroke-width="0.5"/>
+  </g>
+
+  <!-- Accent dots -->
+  <circle cx="300" cy="150" r="4" fill="#FFB347"/>
+  <circle cx="300" cy="650" r="4" fill="#FFB347"/>
+  <circle cx="150" cy="400" r="4" fill="#FFB347"/>
+  <circle cx="450" cy="400" r="4" fill="#FFB347"/>
+
+  <!-- Technical measurement marks -->
+  <g opacity="0.5" stroke="#2F4F4F" stroke-width="0.5">
+    <line x1="280" y1="160" x2="320" y2="160"/>
+    <line x1="290" y1="155" x2="290" y2="165"/>
+    <line x1="300" y1="155" x2="300" y2="165"/>
+    <line x1="310" y1="155" x2="310" y2="165"/>
+  </g>
+</svg>
