@@ -35,9 +35,9 @@ const SECTION_ICONS: Record<SectionType, any> = {
 }
 
 export default function TableOfContents() {
-  const { currentProject, activeChapterId, setActiveChapter, addChapter, reorderChapter, deleteChapter } = useBookStore()
+  const { currentProject, activeChapterId, setActiveChapter, addChapter } = useBookStore()
   const [showAddMenu, setShowAddMenu] = useState(false)
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['chapters']))
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['chapter']))
 
   if (!currentProject) return null
 
@@ -104,42 +104,42 @@ export default function TableOfContents() {
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="font-semibold text-gray-900 mb-3">Contents</h2>
+      <div className="p-4 border-b border-white/10">
+        <h2 className="font-semibold text-white mb-3">Contents</h2>
 
         {/* Add Element Button */}
         <div className="relative">
           <button
             onClick={() => setShowAddMenu(!showAddMenu)}
-            className="w-full px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-2 text-sm font-medium"
+            className="w-full px-3 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-lg transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium shadow-lg"
           >
             <Plus className="w-4 h-4" />
             Add Element
           </button>
 
           {showAddMenu && (
-            <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 max-h-96 overflow-y-auto">
+            <div className="absolute left-0 right-0 top-full mt-2 bg-slate-800/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 py-2 z-50 max-h-96 overflow-y-auto">
               {sectionOrder.map(({ type, label }) => {
                 const Icon = SECTION_ICONS[type]
                 return (
                   <button
                     key={type}
                     onClick={() => addSection(type)}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-3"
+                    className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors flex items-center gap-3"
                   >
-                    <Icon className="w-4 h-4 text-gray-600" />
+                    <Icon className="w-4 h-4 text-gray-400" />
                     <span>{label}</span>
                   </button>
                 )
               })}
 
-              <div className="border-t border-gray-200 my-2" />
+              <div className="border-t border-white/10 my-2" />
 
               <button
                 onClick={() => addSection('image')}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-3"
+                className="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors flex items-center gap-3"
               >
-                <ImageIcon className="w-4 h-4 text-gray-600" />
+                <ImageIcon className="w-4 h-4 text-gray-400" />
                 <span>Full Page Image</span>
               </button>
             </div>
@@ -162,7 +162,7 @@ export default function TableOfContents() {
               {type === 'chapter' && chapters.length > 0 && (
                 <button
                   onClick={() => toggleSection(type)}
-                  className="w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                  className="w-full px-4 py-2 text-left text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-colors flex items-center gap-2"
                 >
                   {isExpanded ? (
                     <ChevronDown className="w-4 h-4" />
@@ -179,18 +179,18 @@ export default function TableOfContents() {
                 <button
                   key={chapter.id}
                   onClick={() => setActiveChapter(chapter.id)}
-                  className={`w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors ${
+                  className={`w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-all duration-200 ${
                     activeChapterId === chapter.id
-                      ? 'bg-blue-50 text-blue-700 border-l-2 border-blue-600'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-2 border-transparent'
+                      ? 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-white border-l-2 border-blue-500'
+                      : 'text-gray-400 hover:bg-white/5 hover:text-gray-200 border-l-2 border-transparent'
                   } ${type === 'chapter' ? 'pl-8' : 'pl-4'}`}
                 >
-                  <GripVertical className="w-3 h-3 text-gray-400" />
+                  <GripVertical className="w-3 h-3 opacity-50" />
                   <Icon className="w-4 h-4 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <div className="truncate font-medium">{chapter.title}</div>
                     {chapter.numbered && chapter.chapterNumber && (
-                      <div className="text-xs text-gray-500">Chapter {chapter.chapterNumber}</div>
+                      <div className="text-xs opacity-60">Chapter {chapter.chapterNumber}</div>
                     )}
                   </div>
                 </button>
@@ -201,15 +201,15 @@ export default function TableOfContents() {
       </div>
 
       {/* Footer Info */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <div className="text-xs text-gray-600 space-y-1">
+      <div className="p-4 border-t border-white/10 bg-slate-900/50">
+        <div className="text-xs text-gray-400 space-y-1">
           <div className="flex justify-between">
             <span>Total sections:</span>
-            <span className="font-medium">{currentProject.chapters.length}</span>
+            <span className="font-medium text-gray-300">{currentProject.chapters.length}</span>
           </div>
           <div className="flex justify-between">
             <span>Chapters:</span>
-            <span className="font-medium">{groupedChapters['chapter']?.length || 0}</span>
+            <span className="font-medium text-gray-300">{groupedChapters['chapter']?.length || 0}</span>
           </div>
         </div>
       </div>
