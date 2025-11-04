@@ -1,110 +1,71 @@
 'use client'
 
-import { useState, useCallback, useEffect, useRef } from 'react'
-import { Upload, BookOpen, Sparkles, Zap, Palette, Download, ArrowRight, Star } from 'lucide-react'
+import { useState, useCallback } from 'react'
+import { Upload, BookOpen, Sparkles, Search, ChevronRight, FileText, Zap } from 'lucide-react'
 import { useBookStore } from '@/lib/store'
 
-// Flowing particles configuration
-const PARTICLES_COUNT = 50
-const createParticle = (index: number) => ({
-  id: index,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: Math.random() * 4 + 1,
-  speedX: (Math.random() - 0.5) * 0.5,
-  speedY: (Math.random() - 0.5) * 0.5,
-  opacity: Math.random() * 0.5 + 0.1,
-})
+const TEMPLATES = [
+  {
+    id: 1,
+    name: 'Classic Chapter',
+    category: 'Fiction',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23fffef8" width="200" height="280"/%3E%3Ctext x="20" y="40" font-family="Georgia" font-size="24" font-weight="bold"%3EChapter 1%3C/text%3E%3Cline x1="20" y1="50" x2="100" y2="50" stroke="%23333" stroke-width="2"/%3E%3Ctext x="20" y="80" font-family="Georgia" font-size="14" fill="%23666"%3EIt was a dark and%3C/text%3E%3Ctext x="20" y="100" font-family="Georgia" font-size="14" fill="%23666"%3Estormy night when...%3C/text%3E%3C/svg%3E',
+  },
+  {
+    id: 2,
+    name: 'Modern Minimal',
+    category: 'Non-Fiction',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23ffffff" width="200" height="280"/%3E%3Ctext x="20" y="140" font-family="Helvetica" font-size="32" font-weight="bold"%3E01%3C/text%3E%3Ctext x="20" y="170" font-family="Helvetica" font-size="16"%3EIntroduction%3C/text%3E%3Crect x="20" y="180" width="80" height="2" fill="%23000"/%3E%3C/svg%3E',
+  },
+  {
+    id: 3,
+    name: 'Art Deco',
+    category: 'Fiction',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="deco" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%231a1a2e"/%3E%3Cstop offset="100%25" style="stop-color:%2316213e"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="url(%23deco)" width="200" height="280"/%3E%3Ctext x="100" y="120" text-anchor="middle" font-family="Georgia" font-size="28" font-weight="bold" fill="%23ffd700"%3ECHAPTER%3C/text%3E%3Ctext x="100" y="160" text-anchor="middle" font-family="Georgia" font-size="48" font-weight="bold" fill="%23ffd700"%3EI%3C/text%3E%3Cline x1="60" y1="180" x2="140" y2="180" stroke="%23ffd700" stroke-width="2"/%3E%3C/svg%3E',
+  },
+  {
+    id: 4,
+    name: 'Botanical',
+    category: 'Poetry',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23f0f9f0" width="200" height="280"/%3E%3Ccircle cx="100" cy="40" r="20" fill="%234a7c59" opacity="0.3"/%3E%3Ctext x="100" y="120" text-anchor="middle" font-family="Georgia" font-size="24" font-style="italic" fill="%234a7c59"%3EChapter One%3C/text%3E%3Ctext x="100" y="150" text-anchor="middle" font-family="Georgia" font-size="14" fill="%236b9b7f"%3E❦%3C/text%3E%3C/svg%3E',
+  },
+  {
+    id: 5,
+    name: 'Neon Cyberpunk',
+    category: 'Sci-Fi',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%230a0e1a" width="200" height="280"/%3E%3Crect x="15" y="15" width="170" height="250" fill="none" stroke="%23ff006e" stroke-width="2"/%3E%3Crect x="20" y="20" width="160" height="240" fill="none" stroke="%2300f5ff" stroke-width="1" opacity="0.5"/%3E%3Ctext x="100" y="140" text-anchor="middle" font-family="monospace" font-size="24" font-weight="bold" fill="%23ff006e"%3E&gt; CHAPTER_01%3C/text%3E%3C/svg%3E',
+  },
+  {
+    id: 6,
+    name: 'Luxury Gold',
+    category: 'Premium',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="gold" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23ffd700"/%3E%3Cstop offset="50%25" style="stop-color:%23ffed4e"/%3E%3Cstop offset="100%25" style="stop-color:%23ffd700"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="%23000000" width="200" height="280"/%3E%3Crect x="30" y="30" width="140" height="220" fill="none" stroke="url(%23gold)" stroke-width="3"/%3E%3Ctext x="100" y="140" text-anchor="middle" font-family="Georgia" font-size="32" font-weight="bold" fill="url(%23gold)"%3EI%3C/text%3E%3C/svg%3E',
+  },
+  {
+    id: 7,
+    name: 'Magazine',
+    category: 'Non-Fiction',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23ffffff" width="200" height="280"/%3E%3Crect x="0" y="0" width="200" height="100" fill="%23e94560"/%3E%3Ctext x="20" y="140" font-family="Arial" font-size="28" font-weight="bold"%3EChapter 1%3C/text%3E%3Ctext x="20" y="165" font-family="Arial" font-size="14" fill="%23666"%3EThe Beginning%3C/text%3E%3C/svg%3E',
+  },
+  {
+    id: 8,
+    name: 'Typewriter',
+    category: 'Memoir',
+    thumbnail: 'data:image/svg+xml,%3Csvg width="200" height="280" xmlns="http://www.w3.org/2000/svg"%3E%3Crect fill="%23f5f5dc" width="200" height="280"/%3E%3Ctext x="20" y="40" font-family="Courier New" font-size="18" font-weight="bold"%3ECHAPTER ONE%3C/text%3E%3Ctext x="20" y="80" font-family="Courier New" font-size="12"%3EIt began on a...%3C/text%3E%3Ctext x="20" y="100" font-family="Courier New" font-size="12"%3Equiet morning in...%3C/text%3E%3C/svg%3E',
+  },
+]
 
-interface WelcomeScreenProps {
-  onImport: () => void
-}
-
-export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
+export default function WelcomeScreen({ onImport }: { onImport: () => void }) {
   const { createProject } = useBookStore()
-  const [isDragging, setIsDragging] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [scrollY, setScrollY] = useState(0)
-  const [particles, setParticles] = useState(() =>
-    Array.from({ length: PARTICLES_COUNT }, (_, i) => createParticle(i))
-  )
-  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
-  const observerRef = useRef<IntersectionObserver | null>(null)
-
-  // Animated particle system
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setParticles(prev => prev.map(p => ({
-        ...p,
-        x: (p.x + p.speedX + 100) % 100,
-        y: (p.y + p.speedY + 100) % 100,
-      })))
-    }, 50)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Intersection observer for scroll animations
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          setIsVisible(prev => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting
-          }))
-        })
-      },
-      { threshold: 0.1, rootMargin: '-50px' }
-    )
-
-    return () => observerRef.current?.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }, [])
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-  }, [])
-
-  const handleDrop = useCallback(async (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-
-    const files = Array.from(e.dataTransfer.files)
-    const file = files[0]
-    if (file) {
-      await processFile(file)
-    }
-  }, [])
-
-  const handleFileSelect = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      await processFile(file)
-    }
-  }, [])
-
+  const [selectedTemplate, setSelectedTemplate] = useState(TEMPLATES[0])
+  const [searchQuery, setSearchQuery] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
   const [processingStep, setProcessingStep] = useState('')
+
+  const filteredTemplates = TEMPLATES.filter(t =>
+    t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    t.category.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   const processFile = async (file: File) => {
     setIsProcessing(true)
@@ -142,337 +103,251 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
       chapters.push(currentChapter)
     }
 
-    setProcessingStep(`Found ${chapters.length} chapters! Formatting...`)
-    await new Promise(resolve => setTimeout(resolve, 600))
+    setProcessingStep(`Found ${chapters.length} chapters!`)
+    await new Promise(resolve => setTimeout(resolve, 400))
 
     createProject(file.name.replace(/\.[^/.]+$/, ''), chapters)
-
-    setProcessingStep('Opening your book designer...')
-    await new Promise(resolve => setTimeout(resolve, 400))
 
     setIsProcessing(false)
     onImport()
   }
 
-  const features = [
-    {
-      icon: Palette,
-      title: 'Visual Designer',
-      description: 'Drag-drop elements like Canva. Click to edit anything.',
-    },
-    {
-      icon: Sparkles,
-      title: '3D Preview',
-      description: 'Rotate and inspect your book in stunning 3D.',
-    },
-    {
-      icon: Zap,
-      title: 'Instant Templates',
-      description: 'Browse hundreds of professional templates.',
-    },
-    {
-      icon: Download,
-      title: 'Print-Ready Export',
-      description: 'Export to PDF with professional formatting.',
-    },
-  ]
+  const handleFileSelect = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      await processFile(file)
+    }
+  }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden relative">
-      {/* Animated Background Gradient */}
-      <div
-        className="absolute inset-0 opacity-40 transition-opacity duration-1000"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(157, 255, 32, 0.15), rgba(99, 102, 241, 0.15) 40%, transparent 70%)`,
-        }}
-      />
+    <div className="h-screen flex flex-col bg-gray-50">
+      {/* Top Bar */}
+      <div className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+            <BookOpen className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">Block C</h1>
+            <p className="text-xs text-gray-500">Your Vellum Alternative</p>
+          </div>
+        </div>
 
-      {/* Flowing Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map(p => (
-          <div
-            key={p.id}
-            className="absolute rounded-full bg-gradient-to-br from-blue-400 to-purple-600 transition-all duration-1000"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-              opacity: p.opacity,
-              boxShadow: `0 0 ${p.size * 2}px rgba(99, 102, 241, ${p.opacity})`,
-            }}
-          />
-        ))}
+        <div className="flex items-center gap-4">
+          <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+            Free Forever
+          </div>
+        </div>
       </div>
 
-      {/* Grid Pattern with parallax */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `linear-gradient(rgba(157,255,32,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(157,255,32,0.1) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-          transform: `translateY(${scrollY * 0.3}px) scale(1.2)`,
-        }}
-      />
+      {/* Main Content - 3 Column Layout */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* LEFT SIDEBAR - Templates */}
+        <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
+          <div className="p-4 border-b border-gray-200">
+            <h2 className="font-bold text-gray-900 mb-3">Templates</h2>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search templates..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
 
-      {/* Dynamic Orbs */}
-      <div
-        className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 animate-pulse"
-        style={{
-          top: '10%',
-          left: '10%',
-          background: 'radial-gradient(circle, rgba(157,255,32,0.4), transparent 70%)',
-        }}
-      />
-      <div
-        className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 animate-pulse"
-        style={{
-          bottom: '10%',
-          right: '10%',
-          background: 'radial-gradient(circle, rgba(99,102,241,0.4), transparent 70%)',
-          animationDelay: '1s',
-        }}
-      />
-      <div
-        className="absolute w-96 h-96 rounded-full blur-3xl opacity-15 animate-pulse"
-        style={{
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(233,69,96,0.3), transparent 70%)',
-          animationDelay: '2s',
-        }}
-      />
+          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {filteredTemplates.map((template) => (
+              <button
+                key={template.id}
+                onClick={() => setSelectedTemplate(template)}
+                className={`w-full text-left p-3 rounded-lg border-2 transition-all ${
+                  selectedTemplate.id === template.id
+                    ? 'border-blue-500 bg-blue-50'
+                    : 'border-gray-200 hover:border-blue-300 bg-white'
+                }`}
+              >
+                <div className="aspect-[3/4] mb-2 rounded overflow-hidden bg-gray-100">
+                  <img
+                    src={template.thumbnail}
+                    alt={template.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm text-gray-900">{template.name}</h3>
+                  <p className="text-xs text-gray-500">{template.category}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="p-4 border-t border-gray-200">
+            <p className="text-xs text-center text-gray-500">
+              {filteredTemplates.length} templates available
+            </p>
+          </div>
+        </div>
+
+        {/* CENTER - Canvas Area */}
+        <div className="flex-1 bg-gray-100 flex flex-col items-center justify-center p-12">
+          <div className="max-w-2xl text-center space-y-8">
+            {/* Selected Template Preview */}
+            <div className="mx-auto w-64 aspect-[3/4] rounded-xl shadow-2xl overflow-hidden bg-white">
+              <img
+                src={selectedTemplate.thumbnail}
+                alt={selectedTemplate.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full">
+                <Sparkles className="w-4 h-4 text-blue-600" />
+                <span className="text-sm font-medium text-blue-900">
+                  {selectedTemplate.name} Template
+                </span>
+              </div>
+
+              <h2 className="text-4xl font-bold text-gray-900">
+                What will you create today?
+              </h2>
+
+              <p className="text-lg text-gray-600">
+                Upload your manuscript to get started with the <strong>{selectedTemplate.name}</strong> template.
+                You can customize everything once you're inside.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <input
+                type="file"
+                accept=".md,.txt,.pdf,.docx"
+                onChange={handleFileSelect}
+                className="hidden"
+                id="main-file-upload"
+              />
+              <label
+                htmlFor="main-file-upload"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg cursor-pointer hover:shadow-2xl transition-all flex items-center justify-center gap-3 group"
+              >
+                <Upload className="w-5 h-5" />
+                Upload Your Manuscript
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </label>
+              <p className="text-sm text-gray-500">
+                Supports .md, .txt, .pdf, .docx • No signup required
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDEBAR - Quick Start */}
+        <div className="w-80 bg-white border-l border-gray-200 p-6 space-y-6 overflow-y-auto">
+          <div>
+            <h3 className="font-bold text-gray-900 mb-4">Quick Start Guide</h3>
+            <div className="space-y-4">
+              <div className="flex gap-3">
+                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                  <span className="text-blue-600 font-bold text-sm">1</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-900">Choose a Template</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Browse templates on the left and select your favorite style
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                  <span className="text-purple-600 font-bold text-sm">2</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-900">Upload Your Book</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Upload your manuscript in any format (.md, .txt, .pdf, .docx)
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <span className="text-green-600 font-bold text-sm">3</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-900">Design & Customize</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Use the visual editor to customize every element
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                  <span className="text-orange-600 font-bold text-sm">4</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-900">Export to PDF</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Download your print-ready PDF and start publishing
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-gray-200">
+            <h3 className="font-bold text-gray-900 mb-3">Features</h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Zap className="w-4 h-4 text-yellow-500" />
+                <span className="text-sm text-gray-700">21 Professional Templates</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-purple-500" />
+                <span className="text-sm text-gray-700">3D Book Preview</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText className="w-4 h-4 text-blue-500" />
+                <span className="text-sm text-gray-700">Drag-Drop Editor</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-green-500" />
+                <span className="text-sm text-gray-700">Print-Ready Export</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-gray-200 bg-gradient-to-br from-blue-50 to-purple-50 -mx-6 -mb-6 p-6">
+            <h3 className="font-bold text-gray-900 mb-2">Ready to start?</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Upload your manuscript and see the magic happen!
+            </p>
+            <label
+              htmlFor="main-file-upload"
+              className="block w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold text-center cursor-pointer hover:shadow-lg transition-all"
+            >
+              Get Started
+            </label>
+          </div>
+        </div>
+      </div>
 
       {/* Processing Overlay */}
       {isProcessing && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center">
-          <div className="text-center space-y-6 max-w-md">
-            <div className="relative">
-              <div className="w-32 h-32 mx-auto">
-                <div className="absolute inset-0 border-4 border-lime-400/30 rounded-full" />
-                <div className="absolute inset-0 border-4 border-lime-400 rounded-full border-t-transparent animate-spin" />
-              </div>
-              <Star className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-lime-400 animate-pulse" />
-            </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold text-white">{processingStep}</h3>
-              <p className="text-gray-400">This will only take a moment...</p>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" />
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
+              <h3 className="text-xl font-bold text-gray-900">{processingStep}</h3>
+              <p className="text-gray-600">This will only take a moment...</p>
             </div>
           </div>
         </div>
       )}
-
-      {/* Content */}
-      <div className="relative z-10">
-        {/* Hero Section */}
-        <div className="max-w-7xl mx-auto px-8 py-32">
-          <div className="text-center space-y-8 mb-20">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-lime-400/10 backdrop-blur-xl border border-lime-400/20 rounded-full">
-              <Sparkles className="w-4 h-4 text-lime-400" />
-              <span className="text-sm font-medium text-lime-300">Your personal Vellum alternative • Free forever</span>
-            </div>
-
-            {/* Headline with staggered animation */}
-            <h1 className="text-8xl font-black tracking-tight leading-none">
-              <span
-                className="inline-block bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent animate-fade-in-up"
-                style={{ animationDelay: '0.1s' }}
-              >
-                Design Books
-              </span>
-              <br />
-              <span
-                className="inline-block bg-gradient-to-r from-lime-400 via-green-400 to-emerald-400 bg-clip-text text-transparent animate-fade-in-up"
-                style={{ animationDelay: '0.3s', textShadow: '0 0 40px rgba(157,255,32,0.3)' }}
-              >
-                Like Never Before
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className="text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed animate-fade-in-up"
-              style={{ animationDelay: '0.5s' }}
-            >
-              <span className="text-lime-400 font-semibold">Visual editor</span>. Drag-drop design. <span className="text-blue-400 font-semibold">3D preview</span>. Export print-ready PDFs.
-              <br />
-              Everything you need to create <span className="text-purple-400 font-semibold">stunning books</span>.
-            </p>
-
-            {/* CTA */}
-            <div className="flex flex-col items-center gap-6 pt-8">
-              <div
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                className={`relative group transition-all duration-500 ${
-                  isDragging ? 'scale-105' : ''
-                }`}
-              >
-                <input
-                  type="file"
-                  accept=".md,.txt,.pdf,.docx"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                  id="file-upload"
-                />
-                <label
-                  htmlFor="file-upload"
-                  className="relative cursor-pointer block"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative px-12 py-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center gap-4 group-hover:shadow-2xl transition-all">
-                    <Upload className="w-6 h-6" />
-                    <span className="text-xl font-bold">Drop Your Manuscript or Click to Upload</span>
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </label>
-              </div>
-
-              <p className="text-sm text-gray-500">
-                Supports .md, .txt, .pdf, .docx • Free to use • No signup required
-              </p>
-            </div>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-4 gap-8 mb-32">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="group relative"
-                style={{
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative p-8 space-y-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <feature.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{feature.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Interactive 3D Preview Section */}
-          <div className="relative mb-32">
-            <div className="absolute inset-0 bg-gradient-to-r from-lime-600/20 to-blue-600/20 rounded-3xl blur-3xl" />
-            <div className="relative bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8">
-              <div className="text-center mb-6">
-                <h3 className="text-3xl font-bold text-white mb-2">See Your Book Come to Life</h3>
-                <p className="text-gray-400">Upload your manuscript and watch it transform into a beautiful book in seconds</p>
-              </div>
-
-              <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-12 min-h-[600px] flex items-center justify-center relative overflow-hidden">
-                {/* Background animation */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-lime-400 rounded-full blur-3xl animate-pulse" />
-                </div>
-
-                {/* Interactive Book Preview */}
-                <div className="relative z-10 text-center space-y-8">
-                  <div className="relative inline-block animate-float">
-                    {/* Book mockup */}
-                    <div className="relative w-64 h-80 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500">
-                      <div className="absolute inset-0 bg-gradient-to-br from-lime-400/20 to-blue-400/20 rounded-lg" />
-                      <div className="absolute inset-4 flex flex-col items-center justify-center text-white">
-                        <Star className="w-16 h-16 mb-4 text-lime-400" />
-                        <div className="text-2xl font-bold mb-2">Your Book</div>
-                        <div className="text-sm text-gray-300">Beautifully Formatted</div>
-                      </div>
-                      {/* Page edge effect */}
-                      <div className="absolute right-0 top-4 bottom-4 w-2 bg-gradient-to-r from-transparent to-white/10" />
-                    </div>
-
-                    {/* Floating elements */}
-                    <div className="absolute -top-6 -right-6 w-12 h-12 bg-lime-400 rounded-full animate-pulse" />
-                    <div className="absolute -bottom-6 -left-6 w-8 h-8 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-center gap-8 text-sm text-gray-400">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" />
-                        <span>Instant Formatting</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                        <span>3D Preview</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-                        <span>Print Ready</span>
-                      </div>
-                    </div>
-
-                    <p className="text-2xl font-bold text-white">
-                      Drop your manuscript above to get started →
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Social Proof */}
-          <div className="text-center space-y-8">
-            <div className="flex items-center justify-center gap-12">
-              <div className="space-y-2">
-                <div className="text-5xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  10K+
-                </div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">Books Designed</div>
-              </div>
-              <div className="w-px h-16 bg-white/10" />
-              <div className="space-y-2">
-                <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  500+
-                </div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">Templates</div>
-              </div>
-              <div className="w-px h-16 bg-white/10" />
-              <div className="space-y-2">
-                <div className="text-5xl font-black bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent">
-                  100%
-                </div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">Print Ready</div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 text-yellow-400">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <svg key={star} className="w-6 h-6 fill-current" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-              ))}
-              <span className="ml-2 text-gray-400">Loved by 5,000+ authors</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   )
 }
