@@ -13,53 +13,6 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
 
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }, [])
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-  }, [])
-
-  const handleDrop = useCallback(async (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-    setIsProcessing(true)
-
-    const files = Array.from(e.dataTransfer.files)
-    const file = files[0]
-
-    if (file) {
-      await processFile(file)
-    }
-
-    setIsProcessing(false)
-  }, [])
-
-  const handleFileInput = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setIsProcessing(true)
-      await processFile(file)
-      setIsProcessing(false)
-    }
-  }, [])
-
-  const processFile = async (file: File) => {
-    try {
-      const content = await file.text()
-      const chapters = parseDocument(content, file.name)
-
-      createProject(file.name.replace(/\.[^/.]+$/, ''), chapters)
-      onImport()
-    } catch (error) {
-      console.error('Error processing file:', error)
-      alert('Failed to process file. Please try again.')
-    }
-  }
-
   const parseDocument = (content: string, filename: string) => {
     const lines = content.split('\n')
     const chapters: Array<{ title: string; content: string; order: number; sectionType?: any }> = []
@@ -106,6 +59,53 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
 
     return chapters
   }
+
+  const processFile = useCallback(async (file: File) => {
+    try {
+      const content = await file.text()
+      const chapters = parseDocument(content, file.name)
+
+      createProject(file.name.replace(/\.[^/.]+$/, ''), chapters)
+      onImport()
+    } catch (error) {
+      console.error('Error processing file:', error)
+      alert('Failed to process file. Please try again.')
+    }
+  }, [createProject, onImport])
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }, [])
+
+  const handleDrop = useCallback(async (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+    setIsProcessing(true)
+
+    const files = Array.from(e.dataTransfer.files)
+    const file = files[0]
+
+    if (file) {
+      await processFile(file)
+    }
+
+    setIsProcessing(false)
+  }, [processFile])
+
+  const handleFileInput = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setIsProcessing(true)
+      await processFile(file)
+      setIsProcessing(false)
+    }
+  }, [processFile])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-8 relative overflow-hidden">
