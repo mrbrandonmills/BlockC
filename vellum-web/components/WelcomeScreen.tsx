@@ -102,52 +102,48 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
   }, [processFile])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-8 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-8 relative overflow-hidden">
+      {/* Elegant background pattern */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+        <div className="absolute top-0 left-0 w-full h-full" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgb(99 102 241 / 0.15) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }} />
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-5xl w-full">
+      <div className="relative z-10 max-w-6xl w-full">
         {/* Logo and Title */}
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="flex justify-center mb-8">
-            <div className="relative w-32 h-32 group cursor-pointer">
-              {/* Geometric logo with multiple layers */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-3xl transform rotate-12 opacity-80 group-hover:rotate-45 transition-all duration-700 ease-out shadow-2xl" />
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-pink-500 to-orange-500 rounded-3xl transform -rotate-12 group-hover:-rotate-45 transition-all duration-700 ease-out shadow-2xl" />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 rounded-3xl group-hover:scale-110 transition-all duration-700 ease-out shadow-2xl" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <BookOpen className="w-16 h-16 text-white drop-shadow-2xl" strokeWidth={1.5} />
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="flex justify-center mb-6">
+            <div className="relative w-20 h-20">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl shadow-2xl flex items-center justify-center">
+                <BookOpen className="w-10 h-10 text-white" strokeWidth={2} />
               </div>
             </div>
           </div>
 
-          <h1 className="text-7xl font-bold text-white mb-6 tracking-tight">
-            Vellum
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+            Vellum Book Designer
           </h1>
-          <p className="text-2xl text-gray-300 font-light mb-3">
-            Professional Book Designer
+          <p className="text-xl text-gray-600 font-medium mb-2">
+            Professional Book Formatting Made Simple
           </p>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Transform your manuscript into a beautifully formatted book.
-            Import, design, and export to any platform.
+          <p className="text-base text-gray-500 max-w-2xl mx-auto">
+            Choose from luxury templates, see live previews, and export print-ready files
           </p>
         </div>
 
         {/* Upload area */}
-        <div className="mb-12">
+        <div className="mb-10">
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`relative backdrop-blur-xl bg-white/10 border-2 border-dashed rounded-3xl p-16 transition-all duration-300 ${
+            className={`relative bg-white border-2 border-dashed rounded-2xl p-16 transition-all duration-300 shadow-xl ${
               isDragging
-                ? 'border-blue-400 bg-blue-500/20 scale-105 shadow-2xl'
-                : 'border-white/30 hover:border-white/50 hover:bg-white/15'
+                ? 'border-blue-500 bg-blue-50 scale-102 shadow-2xl'
+                : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50/50'
             }`}
           >
             <input
@@ -161,23 +157,23 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
             <div className="text-center pointer-events-none">
               {isProcessing ? (
                 <>
-                  <div className="w-20 h-20 mx-auto mb-6 relative">
-                    <div className="absolute inset-0 rounded-full border-4 border-purple-500/30" />
-                    <div className="absolute inset-0 rounded-full border-4 border-purple-500 border-t-transparent animate-spin" />
+                  <div className="w-16 h-16 mx-auto mb-6 relative">
+                    <div className="absolute inset-0 rounded-full border-4 border-blue-200" />
+                    <div className="absolute inset-0 rounded-full border-4 border-blue-600 border-t-transparent animate-spin" />
                   </div>
-                  <h3 className="text-2xl font-semibold text-white mb-2">Processing your manuscript...</h3>
-                  <p className="text-gray-400">This will just take a moment</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Analyzing your manuscript...</h3>
+                  <p className="text-gray-600">Detecting chapters and structure</p>
                 </>
               ) : (
                 <>
-                  <Upload className="w-20 h-20 mx-auto mb-6 text-white/80" strokeWidth={1.5} />
-                  <h3 className="text-3xl font-semibold text-white mb-3">
+                  <Upload className="w-16 h-16 mx-auto mb-6 text-gray-400" strokeWidth={1.5} />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
                     Drop your manuscript here
                   </h3>
-                  <p className="text-lg text-gray-300 mb-2">
-                    or click to browse
+                  <p className="text-base text-gray-600 mb-3">
+                    or click to browse files
                   </p>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-500">
                     Supports Markdown (.md), Text (.txt), PDF, and Word (.docx)
                   </p>
                 </>
@@ -193,25 +189,30 @@ export default function WelcomeScreen({ onImport }: WelcomeScreenProps) {
               icon: Sparkles,
               title: 'Smart Import',
               description: 'Automatically detects chapters and structure',
+              color: 'from-blue-500 to-cyan-500',
             },
             {
               icon: Palette,
-              title: 'Beautiful Styles',
-              description: '5 professional templates for any genre',
+              title: 'Luxury Templates',
+              description: 'Visual gallery with live book previews',
+              color: 'from-purple-500 to-pink-500',
             },
             {
               icon: Zap,
-              title: 'Multi-Platform',
-              description: 'Export to PDF, EPUB, Kindle, and Apple Books',
+              title: 'Professional Output',
+              description: 'Print-ready PDF and EPUB exports',
+              color: 'from-orange-500 to-red-500',
             },
           ].map((feature, index) => (
             <div
               key={index}
-              className="backdrop-blur-xl bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              className="bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group"
             >
-              <feature.icon className="w-12 h-12 text-purple-400 mb-4" strokeWidth={1.5} />
-              <h4 className="text-xl font-semibold text-white mb-2">{feature.title}</h4>
-              <p className="text-gray-400">{feature.description}</p>
+              <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                <feature.icon className="w-6 h-6 text-white" strokeWidth={2} />
+              </div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h4>
+              <p className="text-sm text-gray-600">{feature.description}</p>
             </div>
           ))}
         </div>
