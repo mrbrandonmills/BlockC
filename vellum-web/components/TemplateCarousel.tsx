@@ -5,6 +5,17 @@ import { ChevronLeft, ChevronRight, Check } from 'lucide-react'
 
 const TEMPLATE_MOODS = [
   {
+    mood: 'Ultra-Premium ✨',
+    color: 'from-yellow-400 via-yellow-500 to-orange-500',
+    templates: [
+      { id: 'executive-lime', name: 'Executive Lime', colors: { bg: '#F6F6F6', text: '#000000', accent: '#9DFF20' } },
+      { id: 'monochrome-luxury', name: 'Monochrome Luxury', colors: { bg: '#FFFFFF', text: '#000000', accent: '#E0E0E0' } },
+      { id: 'asymmetric-bold', name: 'Asymmetric Bold', colors: { bg: '#0A0A0A', text: '#FFFFFF', accent: '#FFD700' } },
+      { id: 'gradient-editorial', name: 'Gradient Editorial', colors: { bg: '#667eea', text: '#FFFFFF', accent: '#FFE5B4' } },
+      { id: 'swiss-precision', name: 'Swiss Precision', colors: { bg: '#FAFAFA', text: '#1A1A1A', accent: '#FF3B30' } },
+    ]
+  },
+  {
     mood: 'Elegant & Refined',
     color: 'from-purple-600 to-pink-600',
     templates: [

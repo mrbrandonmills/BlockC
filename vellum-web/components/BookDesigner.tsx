@@ -61,7 +61,97 @@ export default function BookDesigner() {
     const title = previewChapter?.title || 'Chapter 1'
     const firstPara = content.split('\n')[0] || content
 
+    // Premium templates from baergroup.com aesthetic
     switch (templateId) {
+      case 'executive-lime':
+        return (
+          <div className="h-full flex items-center justify-center p-16 bg-gray-50">
+            <div className="max-w-2xl space-y-12">
+              <div className="space-y-4">
+                <div className="text-9xl font-black tracking-tighter leading-none text-lime-400">01</div>
+                <h1 className="text-5xl font-bold tracking-tight leading-tight text-black">{title}</h1>
+              </div>
+              <div className="text-lg font-light leading-relaxed text-black" style={{ lineHeight: '2.2' }}>
+                <p className="first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:text-green-800">
+                  {firstPara.slice(0, 300)}...
+                </p>
+              </div>
+              <div className="w-24 h-1 bg-lime-400 shadow-lg" />
+            </div>
+          </div>
+        )
+
+      case 'monochrome-luxury':
+        return (
+          <div className="h-full flex items-center justify-center p-20 bg-white">
+            <div className="max-w-xl space-y-16">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-px bg-black" />
+                <span className="text-xs font-light tracking-[0.3em] uppercase text-gray-600">Chapter One</span>
+              </div>
+              <h1 className="text-6xl font-thin tracking-tight leading-none text-black">{title}</h1>
+              <p className="text-base font-light text-black" style={{ lineHeight: '2.5' }}>{firstPara.slice(0, 250)}...</p>
+            </div>
+          </div>
+        )
+
+      case 'asymmetric-bold':
+        return (
+          <div className="h-full flex items-end p-16 bg-black">
+            <div className="w-full grid grid-cols-12 gap-8">
+              <div className="col-span-7 space-y-10">
+                <div>
+                  <div className="text-sm font-bold tracking-widest uppercase mb-6 text-yellow-400">Chapter 01</div>
+                  <h1 className="text-7xl font-black leading-none text-white">
+                    {title.split(' ').map((word, i) => (
+                      <div key={i} className={i % 2 === 0 ? '' : 'ml-16'}>{word}</div>
+                    ))}
+                  </h1>
+                </div>
+              </div>
+              <div className="col-span-5 flex items-end">
+                <p className="text-sm font-light leading-relaxed text-white opacity-80" style={{ lineHeight: '2' }}>
+                  {firstPara.slice(0, 200)}...
+                </p>
+              </div>
+            </div>
+          </div>
+        )
+
+      case 'gradient-editorial':
+        return (
+          <div className="h-full flex items-center justify-center p-16 bg-gradient-to-br from-indigo-500 to-purple-600">
+            <div className="max-w-2xl space-y-12 text-center">
+              <div className="text-9xl font-black opacity-20 text-white">1</div>
+              <h1 className="text-6xl font-bold tracking-tight leading-tight -mt-20 text-white">{title}</h1>
+              <div className="flex justify-center">
+                <div className="w-32 h-1 bg-yellow-200 opacity-60" />
+              </div>
+              <p className="text-lg font-light text-white opacity-90" style={{ lineHeight: '2.2' }}>
+                {firstPara.slice(0, 250)}...
+              </p>
+            </div>
+          </div>
+        )
+
+      case 'swiss-precision':
+        return (
+          <div className="h-full p-16 bg-gray-50">
+            <div className="h-full grid grid-cols-24 gap-4">
+              <div className="col-span-4 flex flex-col justify-between">
+                <div className="text-7xl font-bold text-red-600">01</div>
+                <div className="w-2 h-32 bg-black" />
+              </div>
+              <div className="col-span-16 flex flex-col justify-center space-y-8">
+                <h1 className="text-5xl font-semibold tracking-tight leading-tight text-gray-900">{title}</h1>
+                <p className="text-base font-normal text-gray-900" style={{ lineHeight: '2' }}>
+                  {firstPara.slice(0, 300)}...
+                </p>
+              </div>
+            </div>
+          </div>
+        )
+
       case 'luxury-lab':
         return (
           <div className="bg-gradient-to-br from-slate-100 to-gray-100 p-12 h-full flex items-center justify-center">
